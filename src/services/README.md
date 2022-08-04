@@ -1,0 +1,2 @@
+# Services
+All functions / classes, which fetch data from the backend belong into the services folder. To load data from the backend you can either use the browser api [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)" or install a custom libriary like [axios](https://www.npmjs.com/package/axios).
