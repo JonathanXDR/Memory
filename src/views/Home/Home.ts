@@ -1,11 +1,9 @@
 import Vue from 'vue';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner.vue';
-import Sidebar from '../../components/Sidebar/Sidebar.vue';
 
 export default Vue.extend({
   name: 'Home',
   components: {
-    Sidebar,
     LoadingSpinner,
   },
   data() {
