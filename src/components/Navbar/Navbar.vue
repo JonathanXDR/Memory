@@ -26,12 +26,6 @@
               </li>
             </ul>
           </div>
-          <!-- The right side of the Navbar -->
-          <div class="nav__secondary">
-            <ul class="nav-items">
-              <li class="nav-item">Hello There</li>
-            </ul>
-          </div>
         </div>
       </div>
     </nav>
@@ -39,5 +33,4 @@
 </template>
 
 <script lang="ts" src="./Navbar.ts"></script>
-
 <style src="./Navbar.css"></style>
