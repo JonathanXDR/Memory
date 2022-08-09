@@ -1,5 +1,5 @@
 <template>
-  <div id="card" class="memory-card" @click="myFilter" v-bind:class="{ active: isActive }">
+  <div id="card" class="memory-card" @click="myFilter" :class="{ active: isActive }">
     <sdx-card ref="sdx-card-front" class="front" background="grey"></sdx-card>
     <sdx-card
       ref="sdx-card-back"
