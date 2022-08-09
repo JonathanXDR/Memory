@@ -6,7 +6,7 @@
         <p>Score:</p>
         <p>Time:</p>
       </div>
-      <h1 class="hidden-xs-down">Memory</h1>
+      <h1 class="hidden-xs-down margin-0">Memory</h1>
       <sdx-button label="Reset"></sdx-button>
     </div>
     <div class="cards row flex-items-xs-center full-width--mobile-only">
