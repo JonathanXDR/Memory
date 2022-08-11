@@ -19,6 +19,9 @@
     height: 200px !important;
     width: 200px !important;
   }
+  .score p:not(:last-child) {
+    margin-bottom: 16px !important;
+  }
 }
 
 @media (min-width: 479px) {
