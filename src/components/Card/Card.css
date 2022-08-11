@@ -32,6 +32,10 @@ sdx-card.back {
 }
 
 sdx-card.back,
-.memory-card.active {
+.memory-card.flipped {
   transform: rotateY(180deg);
+}
+
+.memory-card.found {
+  opacity: 0.3;
 }

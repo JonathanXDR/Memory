@@ -1,11 +1,12 @@
 <template>
-  <div id="card" class="memory-card" @click="myFilter" :class="{ active: isActive }">
+  <div>
     <sdx-card ref="sdx-card-front" class="front" background="grey"></sdx-card>
     <sdx-card
       ref="sdx-card-back"
       class="back"
       background="grey"
-      image-src="https://picsum.photos/200"
+      :image-src="card.url"
+      :image-alt="card.title"
     ></sdx-card>
   </div>
 </template>
