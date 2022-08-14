@@ -2,7 +2,7 @@
   <div>
     <sdx-card ref="sdx-card-front" class="front" background="grey"></sdx-card>
     <sdx-card
-      ref="sdx-card-back"
+      ref="sdxCardBack"
       class="back"
       background="grey"
       :image-src="card.url"
@@ -11,5 +11,5 @@
   </div>
 </template>
 
-<script src="./Card.ts" lang="ts"></script>
-<style src="./Card.css" />
+<script src="./CardItem.ts" lang="ts"></script>
+<style src="./CardItem.css" />

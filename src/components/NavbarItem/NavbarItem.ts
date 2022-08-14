@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Navbar',
+  name: 'NavbarItem',
   data() {
     return {
       items: [

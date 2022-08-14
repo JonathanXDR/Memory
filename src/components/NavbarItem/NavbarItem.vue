@@ -32,5 +32,5 @@
   </div>
 </template>
 
-<script lang="ts" src="./Navbar.ts"></script>
-<style src="./Navbar.css"></style>
+<script lang="ts" src="./NavbarItem.ts"></script>
+<style src="./NavbarItem.css"></style>
