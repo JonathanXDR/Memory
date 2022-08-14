@@ -1,36 +1,36 @@
 import Vue from 'vue';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner.vue';
-import Navbar from '../../components/Navbar/Navbar.vue';
-import Card from '../../components/Card/Card.vue';
+import LoadingSpinnerItem from '../../components/LoadingSpinnerItem/LoadingSpinnerItem.vue';
+import NavbarItem from '../../components/NavbarItem/NavbarItem.vue';
+import CardItem from '../../components/CardItem/CardItem.vue';
+
 import axios from 'axios';
-import moment from 'moment';
+import { Card } from '../../types/Card';
 
 export default Vue.extend({
   name: 'Home',
   components: {
-    LoadingSpinner,
-    Navbar,
-    Card,
+    LoadingSpinnerItem,
+    NavbarItem,
+    CardItem,
   },
   data() {
     return {
-      loading: true,
-      showModal: false,
-      cards: [] as any,
-      started: false,
-      startTime: 0 as any,
-      turns: 0,
+      loading: true as boolean,
+      showSplash: false as boolean,
+      cards: [] as Card[],
+      started: false as boolean,
+      startTime: 0,
+      turns: 0 as number,
       flipBackTimer: null as any,
       timer: null as any,
-      time: '--:--',
-      score: 0,
+      time: '--:--' as string,
+      score: 0 as number,
     };
   },
-  // TODO: Update axios with base url etc.
   async created() {
     const response = await axios.get('https://memory-api.dev-scapp.swisscom.com/cards');
-    const cards = response.data.sort(() => 0.5 - Math.random()).slice(0, 8);
-    this.cards = cards.concat(cards).sort(() => 0.5 - Math.random());
+    this.cards = response.data.sort(() => 0.5 - Math.random()).slice(0, 8);
+    this.cards.push(...JSON.parse(JSON.stringify(this.cards)));
     this.resetGame();
   },
   mounted() {
@@ -38,14 +38,15 @@ export default Vue.extend({
   },
   methods: {
     resetGame() {
-      this.showModal = false;
+      this.showSplash = false;
       const cards = this.cards;
+
       this.turns = 0;
       this.score = 0;
       this.started = false;
       this.startTime = 0;
 
-      cards.forEach((card: any) => {
+      cards.forEach(card => {
         card.flipped = false;
         card.found = false;
       });
@@ -54,20 +55,20 @@ export default Vue.extend({
     },
 
     flippedCards() {
-      return this.cards.filter((card: any) => card.flipped);
+      return this.cards.filter(card => card.flipped);
     },
 
     sameFlippedCard() {
       const flippedCards = this.flippedCards();
       if (flippedCards.length == 2) {
-        if (flippedCards[0].id == flippedCards[1].id) {
+        if (flippedCards[0].title == flippedCards[1].title) {
           return true;
         }
       }
     },
 
     setCardFounds() {
-      this.cards.forEach((card: any) => {
+      this.cards.forEach(card => {
         if (card.flipped) {
           card.found = true;
         }
@@ -75,7 +76,7 @@ export default Vue.extend({
     },
 
     checkAllFound() {
-      const foundCards = this.cards.filter((card: any) => card.found);
+      const foundCards = this.cards.filter(card => card.found);
       if (foundCards.length == this.cards.length) {
         return true;
       }
@@ -83,52 +84,56 @@ export default Vue.extend({
 
     startGame() {
       this.started = true;
-      this.startTime = moment();
+      // TODO: start timer
+      // this.startTime = moment();
 
-      this.timer = setInterval(() => {
-        this.time = moment(moment().diff(this.startTime)).format('mm:ss');
-      }, 1000);
+      // this.timer = setInterval(() => {
+      //   this.time = moment(moment().diff(this.startTime)).format('mm:ss');
+      // }, 1000);
     },
 
     finishGame() {
       this.started = false;
       clearInterval(this.timer);
-      const score =
-        1000 -
-        (moment().diff(this.startTime, 'seconds') - this.cards.length * 5) * 3 -
-        (this.turns - this.cards.length) * 5;
-      this.score = Math.max(score, 0);
-      this.showModal = true;
+
+      // TODO: calculate score
+      // const score =
+      //   1000 -
+      //   (moment().diff(this.startTime, 'seconds') - this.cards.length * 5) * 3 -
+      //   (this.turns - this.cards.length) * 5;
+      // this.score = Math.max(score, 0);
+      this.showSplash = true;
     },
 
-    flipCard(card: any) {
+    flipCard(card: Card) {
       if (card.found || card.flipped) {
-        console.log('Card clicked!', card);
         return;
+      }
+
+      if (!this.started) {
+        this.startGame();
       }
 
       const flipCount = this.flippedCards().length;
       if (flipCount == 0) {
-        card.flipped = !card.flipped; // set flipped to true
+        card.flipped = !card.flipped;
       } else if (flipCount == 1) {
-        card.flipped = !card.flipped; // set flipped to true
+        card.flipped = !card.flipped;
         this.turns += 1;
 
         if (this.sameFlippedCard()) {
-          // Match!
           this.flipBackTimer = setTimeout(() => {
             this.clearFlipBackTimer();
             this.setCardFounds();
             this.clearFlips();
 
+            console.log('Match!');
+
             if (this.checkAllFound()) {
               this.finishGame();
             }
           }, 200);
-
-          console.log('Match!');
         } else {
-          // Wrong match
           this.flipBackTimer = setTimeout(() => {
             this.clearFlipBackTimer();
             this.clearFlips();
@@ -140,7 +145,7 @@ export default Vue.extend({
     },
 
     clearFlips() {
-      this.cards.map((card: any) => (card.flipped = false));
+      this.cards.map(card => (card.flipped = false));
     },
 
     clearFlipBackTimer() {

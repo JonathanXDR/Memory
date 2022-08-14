@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="container">
-    <LoadingSpinner v-if="loading" />
+    <LoadingSpinnerItem v-if="loading" />
 
     <div
       class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4"
@@ -8,19 +8,20 @@
       <div class="score">
         <p class="margin-bottom-0 font--semi-bold">Time: {{ time }}</p>
         <p class="margin-bottom-0 font--semi-bold">Turns: {{ turns }}</p>
+        <p class="margin-bottom-0 font--semi-bold">Total score: {{ score }}</p>
       </div>
       <h1 class="hidden-sm-down margin-0">Memory</h1>
       <sdx-button label="Reset" @click="resetGame()"></sdx-button>
     </div>
     <div class="cards row flex-items-xs-center full-width--mobile-only">
-      <card
+      <card-item
         class="memory-card col-xs-auto margin-bottom-1"
         v-for="(card, index) in cards"
         :card="card"
         :key="index"
         :class="{ flipped: card.flipped, found: card.found }"
         @click.native="flipCard(card)"
-      ></card>
+      ></card-item>
     </div>
 
     <sdx-dialog
@@ -32,7 +33,7 @@
     if (arguments[0] === 'closing') document.querySelector('#closable-modal-opener').doFocus();
   "
     >
-      <sdx-dialog-toggle v-if="showModal">
+      <sdx-dialog-toggle v-if="showSplash">
         <sdx-button id="closable-modal-opener" label="Open closable modal"></sdx-button>
       </sdx-dialog-toggle>
 
@@ -55,5 +56,5 @@
   </div>
 </template>
 
-<script src="./Home.ts" lang="ts"></script>
-<style src="./Home.css" />
+<script lang="ts" src="./Home.ts"></script>
+<style src="./Home.css"></style>

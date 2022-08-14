@@ -1,13 +1,13 @@
 import Vue from 'vue';
-import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner.vue';
-import Navbar from './components/Navbar/Navbar.vue';
-import Card from './components/Card/Card.vue';
+import LoadingSpinnerItem from './components/LoadingSpinnerItem/LoadingSpinnerItem.vue';
+import NavbarItem from './components/NavbarItem/NavbarItem.vue';
+import CardItem from './components/CardItem/CardItem.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
-    LoadingSpinner,
-    Navbar,
-    Card,
+    LoadingSpinnerItem,
+    NavbarItem,
+    CardItem,
   },
 });
