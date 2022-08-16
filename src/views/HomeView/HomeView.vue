@@ -13,18 +13,20 @@
       <h1 class="hidden-sm-down margin-0">Memory</h1>
       <sdx-button label="Reset" @click="resetGame()"></sdx-button>
     </div>
-    <div class="cards row flex-items-xs-center full-width--mobile-only">
+
+    <div class="cards row no-gutters flex-items-xs-center full-width--mobile-only">
       <card-item
-        class="memory-card col-xs-auto margin-bottom-1"
+        class="memory-card"
         v-for="(card, index) in cards"
         :card="card"
         :key="index"
         :class="{ flipped: card.flipped, found: card.found }"
-        @click.native="flipCard(card)"
+        @clickCallback="() => flipCard(index)"
       ></card-item>
     </div>
 
     <sdx-dialog
+      v-if="showSplash"
       label="Congratulations! You won!"
       type="closable-modal"
       id="closable-modal-example"
@@ -33,9 +35,9 @@
     if (arguments[0] === 'closing') document.querySelector('#closable-modal-opener').doFocus();
   "
     >
-      <sdx-dialog-toggle v-if="showSplash">
+      <!-- <sdx-dialog-toggle>
         <sdx-button id="closable-modal-opener" label="Open closable modal"></sdx-button>
-      </sdx-dialog-toggle>
+      </sdx-dialog-toggle> -->
 
       <sdx-dialog-content>
         <p>Score: {{ score }}</p>
@@ -56,5 +58,5 @@
   </div>
 </template>
 
-<script lang="ts" src="./Home.ts"></script>
-<style src="./Home.css"></style>
+<script lang="ts" src="./HomeView.ts"></script>
+<style src="./HomeView.css"></style>

@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Card } from '../../types/Card';
 
 export default Vue.extend({
-  name: 'Home',
+  name: 'HomeView',
   components: {
     LoadingSpinnerItem,
     NavbarItem,
@@ -28,9 +28,14 @@ export default Vue.extend({
     };
   },
   async created() {
-    const response = await axios.get('https://memory-api.dev-scapp.swisscom.com/cards');
-    this.cards = response.data.sort(() => 0.5 - Math.random()).slice(0, 8);
+    const { data } = await axios.get('https://memory-api.dev-scapp.swisscom.com/cards');
+    this.cards = data.sort(() => 0.5 - Math.random()).slice(0, 8);
+    // Duplicating cards
     this.cards.push(...JSON.parse(JSON.stringify(this.cards)));
+    // Shuffling cards
+    this.cards = this.cards.sort(() => 0.5 - Math.random());
+    // this.cards.forEach(card => console.log(JSON.stringify(card)));
+
     this.resetGame();
   },
   mounted() {
@@ -51,23 +56,27 @@ export default Vue.extend({
         card.found = false;
       });
 
-      this.cards = cards;
+      // this.cards = cards;
     },
 
     flippedCards() {
+      // create new array of each card that is flipped
       return this.cards.filter(card => card.flipped);
     },
 
     sameFlippedCard() {
       const flippedCards = this.flippedCards();
+
+      console.log(flippedCards);
       if (flippedCards.length == 2) {
-        if (flippedCards[0].title == flippedCards[1].title) {
+        if (flippedCards[0].id == flippedCards[1].id) {
           return true;
         }
       }
     },
 
     setCardFounds() {
+      // set found to true foreach flipped card in this.cards
       this.cards.forEach(card => {
         if (card.flipped) {
           card.found = true;
@@ -76,6 +85,7 @@ export default Vue.extend({
     },
 
     checkAllFound() {
+      // create new array of each card that is found
       const foundCards = this.cards.filter(card => card.found);
       if (foundCards.length == this.cards.length) {
         return true;
@@ -85,27 +95,20 @@ export default Vue.extend({
     startGame() {
       this.started = true;
       // TODO: start timer
-      // this.startTime = moment();
-
-      // this.timer = setInterval(() => {
-      //   this.time = moment(moment().diff(this.startTime)).format('mm:ss');
-      // }, 1000);
     },
 
     finishGame() {
       this.started = false;
-      clearInterval(this.timer);
 
       // TODO: calculate score
-      // const score =
-      //   1000 -
-      //   (moment().diff(this.startTime, 'seconds') - this.cards.length * 5) * 3 -
-      //   (this.turns - this.cards.length) * 5;
-      // this.score = Math.max(score, 0);
       this.showSplash = true;
     },
 
-    flipCard(card: Card) {
+    flipCard(index: number) {
+      //
+      const card = this.cards[index];
+
+      // if card is already flipped or found, return
       if (card.found || card.flipped) {
         return;
       }
@@ -115,10 +118,12 @@ export default Vue.extend({
       }
 
       const flipCount = this.flippedCards().length;
+      console.log('flipCount: ', flipCount);
       if (flipCount == 0) {
         card.flipped = !card.flipped;
       } else if (flipCount == 1) {
         card.flipped = !card.flipped;
+
         this.turns += 1;
 
         if (this.sameFlippedCard()) {
@@ -145,6 +150,7 @@ export default Vue.extend({
     },
 
     clearFlips() {
+      // set each flipped card of array to false
       this.cards.map(card => (card.flipped = false));
     },
 

@@ -1,0 +1,25 @@
+.game-header {
+  gap: 32px;
+}
+
+.cards {
+  gap: 16px;
+}
+
+.memory-card {
+  height: 100px !important;
+  width: 100px !important;
+}
+@media (min-width: 768px) {
+  .memory-card {
+    height: 200px !important;
+    width: 200px !important;
+  }
+}
+
+@media (min-width: 479px) {
+  .memory-card {
+    height: 150px !important;
+    width: 150px !important;
+  }
+}
