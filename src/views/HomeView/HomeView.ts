@@ -44,15 +44,19 @@ export default Vue.extend({
       await this.loadCards();
     },
     async loadCards() {
-      const { data } = await axios.get<CardDTO[]>('https://memory-api.dev-scapp.swisscom.com/cards');
+      const { data } = await axios.get<CardDTO[]>(
+        'https://memory-api.dev-scapp.swisscom.com/cards',
+      );
 
-      const cards: Card[] = data.sort(() => 0.5 - Math.random()).slice(0, 8).map(cardDTO => ({ ...cardDTO, flipped: false, found: false }));
+      const cards: Card[] = data
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 8)
+        .map(cardDTO => ({ ...cardDTO, flipped: false, found: false }));
       // Duplicating cards
       cards.push(...JSON.parse(JSON.stringify(cards)));
       // Shuffling cards
       cards.sort(() => 0.5 - Math.random());
       this.cards = cards;
-      this.resetGame();
     },
 
     flippedCards(): Card[] {
@@ -70,7 +74,7 @@ export default Vue.extend({
       this.cards = this.cards.map(card => {
         card.found = card.flipped || card.found;
         return card;
-      })
+      });
     },
 
     checkAllFound(): boolean {
@@ -126,7 +130,7 @@ export default Vue.extend({
             }, 200);
             return;
           }
-        };
+        }
       }
     },
 

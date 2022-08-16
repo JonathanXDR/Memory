@@ -3,14 +3,7 @@
     <LoadingSpinnerItem v-if="loading" />
 
     <div
-      class="
-        game-header
-        divider
-        row
-        flex-items-xs-between flex-items-xs-middle
-        margin-v-4
-        padding-bottom-4
-      "
+      class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4"
     >
       <div class="score">
         <p class="margin-bottom-0 font--semi-bold">Time: {{ time }}</p>
