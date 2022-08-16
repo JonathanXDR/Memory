@@ -5,6 +5,7 @@ import CardItem from '../../components/CardItem/CardItem.vue';
 
 import axios from 'axios';
 import { Card } from '../../types/Card';
+import { CardDTO } from '@/dto/CardDTO';
 
 export default Vue.extend({
   name: 'HomeView',
@@ -15,97 +16,82 @@ export default Vue.extend({
   },
   data() {
     return {
-      loading: true as boolean,
-      showSplash: false as boolean,
+      loading: true,
+      showSplash: false,
       cards: [] as Card[],
-      started: false as boolean,
+      started: false,
       startTime: 0,
-      turns: 0 as number,
-      flipBackTimer: null as any,
-      timer: null as any,
-      time: '--:--' as string,
-      score: 0 as number,
+      turns: 0,
+      timer: 0,
+      time: 0,
+      score: 0,
     };
   },
   async created() {
-    const { data } = await axios.get('https://memory-api.dev-scapp.swisscom.com/cards');
-    this.cards = data.sort(() => 0.5 - Math.random()).slice(0, 8);
-    // Duplicating cards
-    this.cards.push(...JSON.parse(JSON.stringify(this.cards)));
-    // Shuffling cards
-    this.cards = this.cards.sort(() => 0.5 - Math.random());
-    // this.cards.forEach(card => console.log(JSON.stringify(card)));
-
-    this.resetGame();
+    await this.loadCards();
   },
   mounted() {
     this.loading = false;
   },
   methods: {
-    resetGame() {
+    async resetGame() {
       this.showSplash = false;
-      const cards = this.cards;
-
       this.turns = 0;
       this.score = 0;
       this.started = false;
       this.startTime = 0;
+      this.time = 0;
+      await this.loadCards();
+    },
+    async loadCards() {
+      const { data } = await axios.get<CardDTO[]>('https://memory-api.dev-scapp.swisscom.com/cards');
 
-      cards.forEach(card => {
-        card.flipped = false;
-        card.found = false;
-      });
-
-      // this.cards = cards;
+      const cards: Card[] = data.sort(() => 0.5 - Math.random()).slice(0, 8).map(cardDTO => ({ ...cardDTO, flipped: false, found: false }));
+      // Duplicating cards
+      cards.push(...JSON.parse(JSON.stringify(cards)));
+      // Shuffling cards
+      cards.sort(() => 0.5 - Math.random());
+      this.cards = cards;
+      this.resetGame();
     },
 
-    flippedCards() {
+    flippedCards(): Card[] {
       // create new array of each card that is flipped
       return this.cards.filter(card => card.flipped);
     },
 
-    sameFlippedCard() {
+    sameFlippedCard(): boolean {
       const flippedCards = this.flippedCards();
-
-      console.log(flippedCards);
-      if (flippedCards.length == 2) {
-        if (flippedCards[0].id == flippedCards[1].id) {
-          return true;
-        }
-      }
+      return flippedCards.length == 2 && flippedCards[0].id === flippedCards[1].id;
     },
 
-    setCardFounds() {
+    setCardFounds(): void {
       // set found to true foreach flipped card in this.cards
-      this.cards.forEach(card => {
-        if (card.flipped) {
-          card.found = true;
-        }
-      });
+      this.cards = this.cards.map(card => {
+        card.found = card.flipped || card.found;
+        return card;
+      })
     },
 
-    checkAllFound() {
-      // create new array of each card that is found
-      const foundCards = this.cards.filter(card => card.found);
-      if (foundCards.length == this.cards.length) {
-        return true;
-      }
+    checkAllFound(): boolean {
+      // Check if array length of non found cards is equal to zero
+      return this.cards.filter(card => !card.found).length === 0;
     },
 
-    startGame() {
+    startGame(): void {
       this.started = true;
-      // TODO: start timer
+      this.timer = setInterval(() => this.time++, 1000);
     },
 
-    finishGame() {
+    finishGame(): void {
       this.started = false;
 
       // TODO: calculate score
       this.showSplash = true;
+      clearInterval(this.timer);
     },
 
-    flipCard(index: number) {
-      //
+    flipCard(index: number): void {
       const card = this.cards[index];
 
       // if card is already flipped or found, return
@@ -118,45 +104,38 @@ export default Vue.extend({
       }
 
       const flipCount = this.flippedCards().length;
-      console.log('flipCount: ', flipCount);
-      if (flipCount == 0) {
-        card.flipped = !card.flipped;
-      } else if (flipCount == 1) {
-        card.flipped = !card.flipped;
+      switch (flipCount) {
+        case 0:
+          card.flipped = !card.flipped;
+          break;
+        case 1: {
+          card.flipped = !card.flipped;
 
-        this.turns += 1;
+          this.turns += 1;
 
-        if (this.sameFlippedCard()) {
-          this.flipBackTimer = setTimeout(() => {
-            this.clearFlipBackTimer();
-            this.setCardFounds();
-            this.clearFlips();
-
-            console.log('Match!');
-
-            if (this.checkAllFound()) {
-              this.finishGame();
-            }
-          }, 200);
-        } else {
-          this.flipBackTimer = setTimeout(() => {
-            this.clearFlipBackTimer();
+          setTimeout(() => {
             this.clearFlips();
           }, 1000);
-
-          console.log('Wrong match!');
-        }
+          // Cards matched
+          if (this.sameFlippedCard()) {
+            setTimeout(() => {
+              this.setCardFounds();
+              if (this.checkAllFound()) {
+                this.finishGame();
+              }
+            }, 200);
+            return;
+          }
+        };
       }
     },
 
-    clearFlips() {
+    clearFlips(): void {
       // set each flipped card of array to false
-      this.cards.map(card => (card.flipped = false));
-    },
-
-    clearFlipBackTimer() {
-      clearTimeout(this.flipBackTimer);
-      this.flipBackTimer = null;
+      this.cards = this.cards.map(card => {
+        card.flipped = false;
+        return card;
+      });
     },
   },
 });

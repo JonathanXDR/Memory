@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <div class="front"></div>
-    <div class="back">
-      <img class="cardImg" :src="card.url" :alt="card.title" />
-    </div>
-    {{ card.flipped }}
-
+  <div class="card-item">
+    <div
+      class="back"
+      :style="`background-image: url('${card.url}')`"
+      v-if="card.flipped || card.found"
+    ></div>
+    <div class="front" v-else @click="$emit('clickCallback')"></div>
     <!-- <sdx-card
       v-if="true"
       class="back"
@@ -22,6 +22,5 @@
     ></sdx-card> -->
   </div>
 </template>
-
 <script src="./CardItem.ts" lang="ts"></script>
 <style src="./CardItem.css" />

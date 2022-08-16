@@ -3,7 +3,14 @@
     <LoadingSpinnerItem v-if="loading" />
 
     <div
-      class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4"
+      class="
+        game-header
+        divider
+        row
+        flex-items-xs-between flex-items-xs-middle
+        margin-v-4
+        padding-bottom-4
+      "
     >
       <div class="score">
         <p class="margin-bottom-0 font--semi-bold">Time: {{ time }}</p>
@@ -14,15 +21,10 @@
       <sdx-button label="Reset" @click="resetGame()"></sdx-button>
     </div>
 
-    <div class="cards row no-gutters flex-items-xs-center full-width--mobile-only">
-      <card-item
-        class="memory-card"
-        v-for="(card, index) in cards"
-        :card="card"
-        :key="index"
-        :class="{ flipped: card.flipped, found: card.found }"
-        @clickCallback="() => flipCard(index)"
-      ></card-item>
+    <div class="row full-width--mobile-only">
+      <div class="col-md-3 col-xs-12 margin-top-2" v-for="(card, index) in cards" :key="index">
+        <card-item :card="card" @clickCallback="() => flipCard(index)"></card-item>
+      </div>
     </div>
 
     <sdx-dialog

@@ -1,10 +1,24 @@
-sdx-card.front:hover {
+.front:hover {
   webkit-box-shadow: 4px 12px 40px 6px rgb(0 0 0 / 9%);
   box-shadow: 4px 12px 40px 6px rgb(0 0 0 / 9%);
+  cursor: pointer;
 }
 
-sdx-card.front {
+.front {
   transition: box-shadow 0.25s;
+  background-color: #EDEDED;
+}
+
+.card-item {
+  width: 200px;
+  height: 200px;
+}
+
+.card-item div {
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
 }
 
 .memory-card {
@@ -17,20 +31,15 @@ sdx-card.front {
   transition: transform 0.5s ease-in-out;
 }
 
-sdx-card.back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+.back {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
-sdx-card.back,
+/* .back,
 .memory-card.flipped {
   transform: rotateY(180deg);
-}
+} */
 
 .memory-card.found {
   transform: none !important;
