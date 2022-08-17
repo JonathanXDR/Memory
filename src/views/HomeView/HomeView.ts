@@ -17,7 +17,6 @@ export default Vue.extend({
   data() {
     return {
       loading: true,
-      showSplash: false,
       cards: [] as Card[],
       started: false,
       startTime: 0,
@@ -36,7 +35,11 @@ export default Vue.extend({
   },
   methods: {
     async resetGame() {
-      this.showSplash = false;
+      (this.$refs.modal as HTMLSdxDialogElement).close();
+
+      clearInterval(this.timer);
+      this.timeString = '--:--';
+
       this.turns = 0;
       this.score = 0;
       this.started = false;
@@ -109,8 +112,8 @@ export default Vue.extend({
         (this.time - this.startTime - this.cards.length * 5) * 3 -
         (this.turns - this.cards.length) * 5;
 
-      this.showSplash = true;
       clearInterval(this.timer);
+      (this.$refs.modal as HTMLSdxDialogElement).open();
     },
 
     flipCard(index: number): void {

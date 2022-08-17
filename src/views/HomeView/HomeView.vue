@@ -15,7 +15,7 @@
 
     <div class="cards row flex-items-xs-center no-gutters full-width--mobile-only">
       <div
-        class="col-md-3 col-xs-12 margin-top-2 row flex-items-xs-center"
+        class="col-xs-12 col-sm-3 margin-top-2 row flex-items-xs-center"
         v-for="(card, index) in cards"
         :key="index"
       >
@@ -23,31 +23,15 @@
       </div>
     </div>
 
-    <sdx-dialog
-      label="Congratulations! You won!"
-      type="closable-modal"
-      id="closable-modal-example"
-      display-change-callback="
-    if (arguments[0] === 'open') document.querySelector('#first-input-element').doFocus();
-    if (arguments[0] === 'closing') document.querySelector('#closable-modal-opener').doFocus();
-  "
-    >
-      <sdx-dialog-toggle>
-        <sdx-button id="closable-modal-opener" label="Open closable modal"></sdx-button>
-      </sdx-dialog-toggle>
-
-      <sdx-dialog-content v-if="showSplash" class="col-md-6">
+    <sdx-dialog ref="modal" label="Congratulations! You won!" type="closable-modal">
+      <sdx-dialog-content class="col-md-6">
         <p>Total Score: {{ score }}</p>
         <p>
-          <sdx-input id="first-input-element" label="Enter name"></sdx-input>
+          <sdx-input abel="Enter name" @keyup.enter="resetGame()"></sdx-input>
         </p>
 
         <sdx-button-group>
-          <sdx-button
-            label="Submit"
-            onclick="document.getElementById('closable-modal-example').close()"
-            @click="resetGame()"
-          ></sdx-button>
+          <sdx-button label="Submit" type="submit" @click="resetGame()"></sdx-button>
         </sdx-button-group>
       </sdx-dialog-content>
     </sdx-dialog>
