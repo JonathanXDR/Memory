@@ -25,6 +25,7 @@ export default Vue.extend({
       timer: 0,
       time: 0,
       score: 0,
+      timeString: '--:--',
     };
   },
   async created() {
@@ -84,13 +85,30 @@ export default Vue.extend({
 
     startGame(): void {
       this.started = true;
-      this.timer = setInterval(() => this.time++, 1000);
+
+      this.timer = setInterval(() => {
+        const date = new Date(0);
+
+        date.setSeconds(this.time++);
+        let dateString = date.toISOString().substring(14, 19);
+
+        if (dateString === '59:59') {
+          clearInterval(this.timer);
+          dateString = '∞:∞';
+        }
+
+        this.timeString = dateString;
+      }, 1000);
     },
 
     finishGame(): void {
       this.started = false;
 
-      // TODO: calculate score
+      this.score =
+        1000 -
+        (this.time - this.startTime - this.cards.length * 5) * 3 -
+        (this.turns - this.cards.length) * 5;
+
       this.showSplash = true;
       clearInterval(this.timer);
     },
