@@ -15,7 +15,7 @@
 
     <div class="cards row flex-items-xs-center no-gutters padding-0 full-width--mobile-only">
       <div
-        class="col-xs-4 col-sm-3 margin-top-2 row flex-items-xs-center"
+        class="col-xs-3 col-sm-3 margin-top-2 row flex-items-xs-center"
         v-for="(card, index) in cards"
         :key="index"
       >
