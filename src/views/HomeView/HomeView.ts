@@ -36,16 +36,14 @@ export default Vue.extend({
   methods: {
     async resetGame() {
       (this.$refs.modal as HTMLSdxDialogElement).close();
-
       clearInterval(this.timer);
       this.timeString = '--:--';
-
       this.turns = 0;
-      this.score = 0;
       this.started = false;
       this.startTime = 0;
       this.time = 0;
       await this.loadCards();
+      this.score = 0;
     },
     async loadCards() {
       const { data } = await axios.get<CardDTO[]>(

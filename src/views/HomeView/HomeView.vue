@@ -1,9 +1,9 @@
 <template>
-  <div id="home" class="container">
+  <div id="home" class="container full-width--mobile-only">
     <LoadingSpinnerItem v-if="loading" />
 
     <div
-      class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4"
+      class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4 full-width--mobile-only"
     >
       <div class="score">
         <p class="margin-bottom-0 font--semi-bold">Time: {{ timeString }}</p>
@@ -13,9 +13,9 @@
       <sdx-button label="Reset" @click="resetGame()"></sdx-button>
     </div>
 
-    <div class="cards row flex-items-xs-center no-gutters full-width--mobile-only">
+    <div class="cards row flex-items-xs-center no-gutters padding-0 full-width--mobile-only">
       <div
-        class="col-xs-12 col-sm-3 margin-top-2 row flex-items-xs-center"
+        class="col-xs-4 col-sm-3 margin-top-2 row flex-items-xs-center"
         v-for="(card, index) in cards"
         :key="index"
       >
