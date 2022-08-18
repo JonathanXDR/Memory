@@ -99,7 +99,7 @@ export default Vue.extend({
         }
 
         this.timeString = dateString;
-      }, 1000);
+      }, 1);
     },
 
     finishGame(): void {
@@ -109,6 +109,10 @@ export default Vue.extend({
         1000 -
         (this.time - this.startTime - this.cards.length * 5) * 3 -
         (this.turns - this.cards.length) * 5;
+
+      if (this.score < 0) {
+        this.score = 0;
+      }
 
       clearInterval(this.timer);
       (this.$refs.modal as HTMLSdxDialogElement).open();
