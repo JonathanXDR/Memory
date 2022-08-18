@@ -146,7 +146,7 @@ export default Vue.extend({
               if (this.checkAllFound()) {
                 this.finishGame();
               }
-            }, 200);
+            }, 500);
             return;
           }
         }

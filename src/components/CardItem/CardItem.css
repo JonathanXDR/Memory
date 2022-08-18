@@ -1,36 +1,30 @@
-.front:hover {
-  webkit-box-shadow: 4px 12px 40px 6px rgb(0 0 0 / 9%);
-  box-shadow: 4px 12px 40px 6px rgb(0 0 0 / 9%);
-  cursor: pointer;
-}
-
-.front {
-  transition: box-shadow 0.25s;
-  background-color: #ededed;
-}
-
-.card-item {
+.card-container {
   height: 75px;
   width: 75px;
 }
 
 @media (min-width: 768px) {
-  .card-item {
+  .card-container {
     height: 150px !important;
     width: 150px !important;
   }
 }
 
 @media (min-width: 479px) {
-  .card-item {
+  .card-container {
     height: 100px;
     width: 100px;
   }
 }
 
-.card-item div {
-  /* display: flex; */
-  /* flex-direction: column; */
+.front:hover {
+  webkit-box-shadow: 4px 12px 40px 6px rgb(0 0 0 / 9%);
+  box-shadow: 4px 12px 40px 6px rgb(0 0 0 / 9%);
+  cursor: pointer;
+}
+
+.front,
+.back {
   border: 1px solid rgb(221, 227, 231);
   box-shadow: rgb(51 51 51 / 8%) 0px 4px 16px 0px;
   border-radius: 6px;
@@ -40,59 +34,40 @@
   transition: box-shadow 0.25s;
 }
 
-.memory-card {
+.card-container .back,
+.card-container .front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.card-container .card-item {
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  cursor: pointer;
   transform-style: preserve-3d;
   transition: transform 0.5s ease-in-out;
 }
 
-.back {
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  /* position: absolute; */
-  /* top: 0; */
-  /* left: 0; */
-  width: 100%;
-  height: 100%;
-  /* -webkit-backface-visibility: hidden; */
-  /* backface-visibility: hidden; */
-  /* transform: rotateY(180deg); */
-  /* background-size: 100% 100%; */
-  /* background-repeat: no-repeat; */
-}
-
-/* .back,
-.memory-card.flipped {
+.card-container .back,
+.card-container .flipped {
   transform: rotateY(180deg);
-} */
-
-.memory-card.found {
-  transform: none !important;
-  box-shadow: none;
-  pointer-events: none;
-  opacity: 0.3;
 }
 
-/* .component .content-wrapper {
-  width: 100%;
-  height: 100%;
-  flex-direction: unset !important;
+.found {
+  transform: rotateY(180deg);
 }
 
-.component .image-placeholder {
-  height: 100% !important;
-} */
-
-/* 
-.cardImg {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-} */
+.found .back {
+  box-shadow: none !important;
+  transition: opacity 0.5s;
+  opacity: 0.25;
+}

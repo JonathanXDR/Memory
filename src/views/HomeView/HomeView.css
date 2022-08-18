@@ -3,11 +3,11 @@
 }
 
 .cards {
-  gap: 7.5px;
+  gap: 12px;
 }
 
-@media (min-width: 479px) {
+/* @media (min-width: 479px) {
   .cards {
     gap: 0;
   }
-}
+} */
