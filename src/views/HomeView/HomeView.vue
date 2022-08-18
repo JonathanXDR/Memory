@@ -13,7 +13,7 @@
     </div>
 
     <div class="cards row flex-items-xs-center no-gutters padding-0 full-width--mobile-only">
-      <div class="card-container col-md-auto col-xs-3" v-for="(card, index) in cards" :key="index">
+      <div class="card-container col-xs-auto" v-for="(card, index) in cards" :key="index">
         <card-item :card="card" @clickCallback="() => flipCard(index)"></card-item>
       </div>
     </div>
