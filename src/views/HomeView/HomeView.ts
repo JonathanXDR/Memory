@@ -99,7 +99,7 @@ export default Vue.extend({
         }
 
         this.timeString = dateString;
-      }, 1);
+      }, 1000);
     },
 
     finishGame(): void {
