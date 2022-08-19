@@ -7,13 +7,5 @@
   </div>
 </template>
 
-<style scoped>
-.containerSpinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-}
-</style>
+<script lang="ts" src="./LoadingSpinnerItem.ts"></script>
+<style src="./LoadingSpinnerItem.css"></style>
