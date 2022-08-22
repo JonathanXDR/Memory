@@ -45,9 +45,11 @@ export default Vue.extend({
       await this.loadCards();
       this.score = 0;
     },
-    userNameValid() {
-      return this.userName.length;
+
+    userNameValid(): boolean {
+      return this.userName.length > 0;
     },
+
     // ApiService get cards
     async loadCards() {
       const data = await ApiService.getCards();

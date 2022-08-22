@@ -27,7 +27,7 @@
             placeholder="Enter Username..."
             type="text"
             :valid="userNameValid"
-            validation-message="Please enter a valid userName"
+            validation-message="Please enter a valid user name"
             required
             v-model.trim="userName"
             @keyup.enter="resetGame()"
