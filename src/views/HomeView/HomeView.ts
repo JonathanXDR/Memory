@@ -4,7 +4,6 @@ import NavbarItem from '../../components/NavbarItem/NavbarItem.vue';
 import CardItem from '../../components/CardItem/CardItem.vue';
 
 import { Card } from '../../types/Card';
-// import CardDTO from '../../dto/CardDTO';
 import ApiService from '@/services/ApiService';
 
 export default Vue.extend({
