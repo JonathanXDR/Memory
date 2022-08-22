@@ -3,9 +3,8 @@ import LoadingSpinnerItem from '../../components/LoadingSpinnerItem/LoadingSpinn
 import NavbarItem from '../../components/NavbarItem/NavbarItem.vue';
 import CardItem from '../../components/CardItem/CardItem.vue';
 
-import axios from 'axios';
 import { Card } from '../../types/Card';
-import { CardDTO } from '@/dto/CardDTO';
+import ApiService from '@/services/ApiService';
 
 export default Vue.extend({
   name: 'HomeView',
@@ -24,11 +23,17 @@ export default Vue.extend({
       timer: 0,
       time: 0,
       score: 0,
+      username: '',
       timeString: '--:--',
     };
   },
   async created() {
     await this.loadCards();
+  },
+  computed: {
+    usernameVaild() {
+      return this.username.length > 0;
+    },
   },
   mounted() {
     this.loading = false;
@@ -45,11 +50,10 @@ export default Vue.extend({
       await this.loadCards();
       this.score = 0;
     },
-    async loadCards() {
-      const { data } = await axios.get<CardDTO[]>(
-        'https://memory-api.dev-scapp.swisscom.com/cards',
-      );
 
+    // ApiService get cards
+    async loadCards() {
+      const data = await ApiService.getCards();
       const cards: Card[] = data
         .sort(() => 0.5 - Math.random())
         .slice(0, 8)
@@ -116,6 +120,9 @@ export default Vue.extend({
 
       clearInterval(this.timer);
       (this.$refs.modal as HTMLSdxDialogElement).open();
+
+      // ApiService add id, score, timestamp, username to scoreboard
+      ApiService.addScore(this.score, this.username);
     },
 
     flipCard(index: number): void {

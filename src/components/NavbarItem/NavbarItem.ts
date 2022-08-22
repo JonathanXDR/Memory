@@ -5,7 +5,7 @@ export default Vue.extend({
   data() {
     return {
       items: [
-        { name: 'Memory', route: '/' },
+        { name: 'Game', route: '/' },
         { name: 'Scoreboard', route: '/scoreboard' },
       ],
       isOpen: false,
