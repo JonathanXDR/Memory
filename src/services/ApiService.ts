@@ -1,35 +1,23 @@
 import axios from 'axios';
 import { CardDTO } from '@/dto/CardDTO';
-import { ScoreDTO } from '@/dto/ScoreDTO';
+import { ScoreBaseDTO } from '@/dto/ScoreBaseDTO';
+import { ScoreGetDTO } from '@/dto/ScoreGetDTO';
+import HttpService from '@/services/HttpService';
 
 const ApiService = {
-  init(): void {
-    axios.defaults.baseURL = 'https://memory-api.dev-scapp.swisscom.com';
-  },
-
   async getCards(): Promise<CardDTO[]> {
-    const { data } = await axios.get<CardDTO[]>('https://memory-api.dev-scapp.swisscom.com/cards');
+    const { data } = await HttpService.get<CardDTO[]>('/cards');
     console.log(data);
     return data;
   },
 
-  async getScores(): Promise<ScoreDTO[]> {
-    const { data } = await axios.get<ScoreDTO[]>(
-      'https://memory-api.dev-scapp.swisscom.com/scores',
-    );
+  async getScores(): Promise<ScoreGetDTO[]> {
+    const { data } = await HttpService.get<ScoreGetDTO[]>('/scores');
     return data;
   },
 
-  async addScore(score: number, username: string): Promise<ScoreDTO> {
-    const { data } = await axios.post<ScoreDTO>(
-      'https://memory-api.dev-scapp.swisscom.com/scores',
-      {
-        id: Math.random().toString(36).substring(2, 24),
-        username: username,
-        score: score,
-        timestamp: new Date().toISOString(),
-      },
-    );
+  async addScore(score: ScoreBaseDTO): Promise<ScoreGetDTO> {
+    const { data } = await HttpService.post<ScoreGetDTO>('score', score);
     return data;
   },
 };

@@ -4,6 +4,7 @@ import NavbarItem from '../../components/NavbarItem/NavbarItem.vue';
 import CardItem from '../../components/CardItem/CardItem.vue';
 
 import { Card } from '../../types/Card';
+// import CardDTO from '../../dto/CardDTO';
 import ApiService from '@/services/ApiService';
 
 export default Vue.extend({
@@ -23,17 +24,12 @@ export default Vue.extend({
       timer: 0,
       time: 0,
       score: 0,
-      username: '',
+      userName: '',
       timeString: '--:--',
     };
   },
   async created() {
     await this.loadCards();
-  },
-  computed: {
-    usernameVaild() {
-      return this.username.length > 0;
-    },
   },
   mounted() {
     this.loading = false;
@@ -50,7 +46,9 @@ export default Vue.extend({
       await this.loadCards();
       this.score = 0;
     },
-
+    userNameValid() {
+      return this.userName.length;
+    },
     // ApiService get cards
     async loadCards() {
       const data = await ApiService.getCards();
@@ -121,8 +119,10 @@ export default Vue.extend({
       clearInterval(this.timer);
       (this.$refs.modal as HTMLSdxDialogElement).open();
 
-      // ApiService add id, score, timestamp, username to scoreboard
-      ApiService.addScore(this.score, this.username);
+      ApiService.addScore({
+        userName: this.userName,
+        score: this.score,
+      });
     },
 
     flipCard(index: number): void {

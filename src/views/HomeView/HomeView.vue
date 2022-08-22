@@ -26,10 +26,10 @@
             label="Username"
             placeholder="Enter Username..."
             type="text"
-            :valid="usernameVaild"
-            validation-message="Please enter a valid username"
+            :valid="userNameValid"
+            validation-message="Please enter a valid userName"
             required
-            v-model.trim="username"
+            v-model.trim="userName"
             @keyup.enter="resetGame()"
           ></sdx-input>
         </p>
@@ -38,7 +38,7 @@
           <sdx-button
             label="Submit"
             type="submit"
-            :disabled="!usernameVaild"
+            :disabled="!userNameValid"
             @click="resetGame()"
           ></sdx-button>
         </sdx-button-group>
