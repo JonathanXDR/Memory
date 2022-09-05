@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import LoadingSpinnerItem from '../../components/LoadingSpinnerItem/LoadingSpinnerItem.vue';
+import SuccessNotification from '../../components/SuccessNotification/SuccessNotification.vue';
 import NavbarItem from '../../components/NavbarItem/NavbarItem.vue';
 import CardItem from '../../components/CardItem/CardItem.vue';
 
@@ -10,6 +11,7 @@ export default Vue.extend({
   name: 'HomeView',
   components: {
     LoadingSpinnerItem,
+    SuccessNotification,
     NavbarItem,
     CardItem,
   },
@@ -25,6 +27,8 @@ export default Vue.extend({
       score: 0,
       userName: '',
       timeString: '--:--',
+      success: false as boolean,
+      message: '',
     };
   },
   async created() {
@@ -62,6 +66,22 @@ export default Vue.extend({
       // Shuffling cards
       cards.sort(() => 0.5 - Math.random());
       this.cards = cards;
+    },
+
+    addResults(): void {
+      if (this.userNameValid) {
+        ApiService.addScore({
+          userName: this.userName,
+          score: this.score,
+        });
+        this.success = true;
+        this.resetGame();
+      }
+    },
+
+    closePopUp() {
+      console.log('closed popup');
+      this.success = false;
     },
 
     flippedCards(): Card[] {

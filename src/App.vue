@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavbarItem />
+    <!-- <SuccessNotification :message="this.msessage" :open="success" :close="closePopUp" /> -->
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
