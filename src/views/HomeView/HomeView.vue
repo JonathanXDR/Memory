@@ -2,7 +2,6 @@
   <div id="home" class="container full-width--mobile-only">
     <LoadingSpinnerItem v-if="loading" />
 
-    <SuccessNotification :message="message" :open="success" :close="closePopUp" />
     <div
       class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4 full-width--mobile-only"
     >
@@ -46,7 +45,7 @@
             maxlength="30"
             :valid="userNameValid"
             :changeCallback.prop="setUserName"
-            :hitEnterCallback.prop="resetGame"
+            :hitEnterCallback="userNameValid === true ? resetGame() : null"
             :validation-message="
               userNameValid === undefined || userNameValid === true
                 ? undefined

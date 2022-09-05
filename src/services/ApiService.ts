@@ -16,7 +16,6 @@ const ApiService = {
 
   async addScore(score: ScoreBaseDTO): Promise<ScoreGetDTO> {
     const { data } = await HttpService.post<ScoreGetDTO>('/scores', score);
-    console.log(data);
     return data;
   },
 };

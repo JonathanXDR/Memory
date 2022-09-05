@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import LoadingSpinnerItem from '../../components/LoadingSpinnerItem/LoadingSpinnerItem.vue';
-import SuccessNotification from '../../components/SuccessNotification/SuccessNotification.vue';
+import { Notification } from '@swisscom/sdx';
+import { MessageClickCallback } from '@swisscom/sdx/dist/es6/notification/Notification';
 import NavbarItem from '../../components/NavbarItem/NavbarItem.vue';
 import CardItem from '../../components/CardItem/CardItem.vue';
 
@@ -11,7 +12,6 @@ export default Vue.extend({
   name: 'HomeView',
   components: {
     LoadingSpinnerItem,
-    SuccessNotification,
     NavbarItem,
     CardItem,
   },
@@ -28,8 +28,6 @@ export default Vue.extend({
       userName: '',
       userNameValid: undefined as boolean | undefined,
       timeString: '--:--',
-      success: false,
-      message: 'Entry successfully saved!',
       rerender: false,
     };
   },
@@ -41,9 +39,7 @@ export default Vue.extend({
   },
   methods: {
     async resetGame() {
-      this.success = true;
-
-      if (this.userNameValid) {
+      if (this.userNameValid || this.userNameValid === undefined) {
         (this.$refs.modal as HTMLSdxDialogElement).close();
 
         clearInterval(this.timer);
@@ -64,6 +60,30 @@ export default Vue.extend({
           this.rerender = false;
         }, 0);
       }
+    },
+
+    displayNotificationHeader(
+      message: string,
+      modifierClass: '' | 'confirmation' | 'alert' = '',
+      containerId = 'notification-header-container',
+      closeAfter = 2000,
+      callback: MessageClickCallback = () => {
+        this.$router.push('/scoreboard');
+        notification.close();
+        return true;
+      },
+      cancelCallback: () => void = () => {
+        return false;
+      },
+    ) {
+      const notification = Notification.showOnHeader(
+        containerId,
+        message,
+        callback,
+        cancelCallback,
+        `${modifierClass === '' ? '' : 'notification--'}${modifierClass}`,
+      );
+      setTimeout(() => notification.close(), closeAfter);
     },
 
     // ApiService get cards
@@ -87,12 +107,8 @@ export default Vue.extend({
           score: this.score,
         });
         this.resetGame();
+        this.displayNotificationHeader('Score successfully saved!', 'confirmation');
       }
-    },
-
-    closePopUp() {
-      console.log('closed popup');
-      this.success = false;
     },
 
     flippedCards(): Card[] {
