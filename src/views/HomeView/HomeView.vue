@@ -6,6 +6,20 @@
     <div
       class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4 full-width--mobile-only"
     >
+      <!-- Debug Menu -->
+      <div class="major-wrapper">
+        <sdx-button
+          @click="startGame()"
+          label="<Debug> Start Game"
+          class="margin-bottom-2"
+        ></sdx-button>
+        <sdx-button
+          @click="finishGame()"
+          label="<Debug> Finish Game"
+          class="margin-bottom-2"
+        ></sdx-button>
+        <p class="margin-bottom-0 font--semi-bold">Total score: {{ score }}</p>
+      </div>
       <div class="score">
         <p class="margin-bottom-0 font--semi-bold">Time: {{ timeString }}</p>
         <p class="margin-bottom-0 font--semi-bold">Turns: {{ turns }}</p>
@@ -21,28 +35,33 @@
 
     <sdx-dialog ref="modal" label="Congratulations! You won!" type="closable-modal">
       <sdx-dialog-content class="col-md-6">
-        <p>Total Score: {{ score }}</p>
-        <p>
+        <div class="row">
+          <p>Total Score: {{ score }}</p>
           <sdx-input
+            v-if="rerender"
+            ref="input"
             label="Username"
-            placeholder="Enter Username..."
             type="text"
+            placeholder="Enter Username..."
+            maxlength="30"
             :valid="userNameValid"
-            validation-message="Please enter a valid user name"
-            required
-            v-model.trim="userName"
-            @keyup.enter="resetGame()"
+            :changeCallback.prop="setUserName"
+            :hitEnterCallback.prop="resetGame"
+            :validation-message="
+              userNameValid === undefined || userNameValid === true
+                ? undefined
+                : 'Please enter a valid username'
+            "
           ></sdx-input>
-        </p>
-
-        <sdx-button-group>
-          <sdx-button
-            label="Submit"
-            type="submit"
-            :disabled="!userNameValid"
-            @click="resetGame()"
-          ></sdx-button>
-        </sdx-button-group>
+          <sdx-button-group class="margin-top-4">
+            <sdx-button
+              label="Submit"
+              type="submit"
+              :disabled="!userNameValid"
+              @click="addResults()"
+            ></sdx-button>
+          </sdx-button-group>
+        </div>
       </sdx-dialog-content>
     </sdx-dialog>
   </div>

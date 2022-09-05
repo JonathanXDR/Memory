@@ -26,9 +26,11 @@ export default Vue.extend({
       time: 0,
       score: 0,
       userName: '',
+      userNameValid: undefined as boolean | undefined,
       timeString: '--:--',
-      success: false as boolean,
-      message: '',
+      success: false,
+      message: 'Entry successfully saved!',
+      rerender: false,
     };
   },
   async created() {
@@ -39,19 +41,29 @@ export default Vue.extend({
   },
   methods: {
     async resetGame() {
-      (this.$refs.modal as HTMLSdxDialogElement).close();
-      clearInterval(this.timer);
-      this.timeString = '--:--';
-      this.turns = 0;
-      this.started = false;
-      this.startTime = 0;
-      this.time = 0;
-      await this.loadCards();
-      this.score = 0;
-    },
+      this.success = true;
 
-    userNameValid(): boolean {
-      return this.userName.length > 0;
+      if (this.userNameValid) {
+        (this.$refs.modal as HTMLSdxDialogElement).close();
+
+        clearInterval(this.timer);
+        this.timeString = '--:--';
+        this.turns = 0;
+        this.started = false;
+        this.startTime = 0;
+        this.time = 0;
+
+        await this.loadCards();
+        this.userName = '';
+
+        (this.$refs.input as HTMLSdxInputElement).value = '';
+
+        this.userNameValid = undefined;
+        this.score = 0;
+        setTimeout(() => {
+          this.rerender = false;
+        }, 0);
+      }
     },
 
     // ApiService get cards
@@ -69,12 +81,11 @@ export default Vue.extend({
     },
 
     addResults(): void {
-      if (this.userNameValid) {
+      if (this.userNameValid && this.userName) {
         ApiService.addScore({
           userName: this.userName,
           score: this.score,
         });
-        this.success = true;
         this.resetGame();
       }
     },
@@ -126,6 +137,9 @@ export default Vue.extend({
     },
 
     finishGame(): void {
+      setTimeout(() => {
+        this.rerender = true;
+      }, 0);
       this.started = false;
 
       this.score =
@@ -139,11 +153,11 @@ export default Vue.extend({
 
       clearInterval(this.timer);
       (this.$refs.modal as HTMLSdxDialogElement).open();
+    },
 
-      ApiService.addScore({
-        userName: this.userName,
-        score: this.score,
-      });
+    setUserName(userName: string) {
+      this.userName = userName;
+      this.userNameValid = userName.length > 0;
     },
 
     flipCard(index: number): void {
