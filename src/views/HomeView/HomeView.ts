@@ -39,27 +39,25 @@ export default Vue.extend({
   },
   methods: {
     async resetGame() {
-      if (this.userNameValid || this.userNameValid === undefined) {
-        (this.$refs.modal as HTMLSdxDialogElement).close();
+      (this.$refs.modal as HTMLSdxDialogElement).close();
 
-        clearInterval(this.timer);
-        this.timeString = '--:--';
-        this.turns = 0;
-        this.started = false;
-        this.startTime = 0;
-        this.time = 0;
+      clearInterval(this.timer);
+      this.timeString = '--:--';
+      this.turns = 0;
+      this.started = false;
+      this.startTime = 0;
+      this.time = 0;
 
-        await this.loadCards();
-        this.userName = '';
+      await this.loadCards();
+      this.userName = '';
 
-        (this.$refs.input as HTMLSdxInputElement).value = '';
+      (this.$refs.input as HTMLSdxInputElement).value = '';
 
-        this.userNameValid = undefined;
-        this.score = 0;
-        setTimeout(() => {
-          this.rerender = false;
-        }, 0);
-      }
+      this.userNameValid = undefined;
+      this.score = 0;
+      setTimeout(() => {
+        this.rerender = false;
+      }, 0);
     },
 
     displayNotificationHeader(

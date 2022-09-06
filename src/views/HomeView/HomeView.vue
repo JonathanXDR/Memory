@@ -45,7 +45,7 @@
             maxlength="30"
             :valid="userNameValid"
             :changeCallback.prop="setUserName"
-            :hitEnterCallback="userNameValid === true ? resetGame() : null"
+            :hitEnterCallback.prop="addResults"
             :validation-message="
               userNameValid === undefined || userNameValid === true
                 ? undefined
