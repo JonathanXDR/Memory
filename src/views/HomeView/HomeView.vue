@@ -39,7 +39,7 @@
 
     <sdx-dialog ref="modal" label="Congratulations! You won!" type="modal">
       <sdx-dialog-content class="col-md-6">
-        <div class="row">
+        <div class="margin-bottom-4">
           <p>Total Score: {{ score }}</p>
           <sdx-input
             v-if="rerender"
@@ -57,15 +57,13 @@
                 : 'Please enter a valid username'
             "
           ></sdx-input>
-          <sdx-button-group class="margin-top-4">
-            <sdx-button
-              label="Submit"
-              type="submit"
-              :disabled="!userNameValid"
-              @click="addResults()"
-            ></sdx-button>
-          </sdx-button-group>
         </div>
+        <sdx-button
+          label="Submit"
+          type="submit"
+          :disabled="!userNameValid"
+          @click="addResults()"
+        ></sdx-button>
       </sdx-dialog-content>
     </sdx-dialog>
   </div>
