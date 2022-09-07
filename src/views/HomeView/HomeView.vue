@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <sdx-dialog ref="modal" label="Congratulations! You won!" type="modal">
+    <sdx-dialog ref="modal" label="Congratulations! You won!" type="closable-modal">
       <sdx-dialog-content class="col-md-6">
         <div class="margin-bottom-4">
           <p>Total Score: {{ score }}</p>
