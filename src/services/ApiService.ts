@@ -14,9 +14,14 @@ const ApiService = {
     return data;
   },
 
-  async addScore(score: ScoreBaseDTO): Promise<ScoreGetDTO> {
-    const { data } = await HttpService.post<ScoreGetDTO>('/scores', score);
+  async addScore(result: ScoreBaseDTO): Promise<ScoreGetDTO> {
+    const { data } = await HttpService.post<ScoreGetDTO>('/scores', result);
     return data;
+  },
+
+  // delete Scores
+  async deleteScores(): Promise<void> {
+    await HttpService.delete('/scores');
   },
 };
 
