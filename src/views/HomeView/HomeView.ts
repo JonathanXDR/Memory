@@ -27,6 +27,7 @@ export default Vue.extend({
       score: 0,
       userName: '',
       userNameValid: undefined as boolean | undefined,
+      onCoolDown: false,
       timeString: '--:--',
       rerender: false,
     };
@@ -39,6 +40,7 @@ export default Vue.extend({
   },
   methods: {
     async resetGame() {
+      this.onCoolDown = true;
       (this.$refs.modal as HTMLSdxDialogElement).close();
 
       clearInterval(this.timer);
@@ -50,14 +52,16 @@ export default Vue.extend({
 
       await this.loadCards();
       this.userName = '';
-
-      (this.$refs.input as HTMLSdxInputElement).value = '';
-
       this.userNameValid = undefined;
       this.score = 0;
+
       setTimeout(() => {
         this.rerender = false;
       }, 0);
+
+      setTimeout(() => {
+        this.onCoolDown = false;
+      }, 500);
     },
 
     displayNotificationHeader(
@@ -86,16 +90,26 @@ export default Vue.extend({
 
     // ApiService get cards
     async loadCards() {
+      const resetCards: Card[] = this.cards.map(cardDTO => ({
+        ...cardDTO,
+        flipped: false,
+        found: false,
+      }));
+
+      this.cards = resetCards;
       const data = await ApiService.getCards();
-      const cards: Card[] = data
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 8)
-        .map(cardDTO => ({ ...cardDTO, flipped: false, found: false }));
-      // Duplicating cards
-      cards.push(...JSON.parse(JSON.stringify(cards)));
-      // Shuffling cards
-      cards.sort(() => 0.5 - Math.random());
-      this.cards = cards;
+
+      setTimeout(() => {
+        const cards: Card[] = data
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 8)
+          .map(cardDTO => ({ ...cardDTO, flipped: false, found: false }));
+        // Duplicating cards
+        cards.push(...JSON.parse(JSON.stringify(cards)));
+        // Shuffling cards
+        cards.sort(() => 0.5 - Math.random());
+        this.cards = cards;
+      }, 250);
     },
 
     addResults(): void {
