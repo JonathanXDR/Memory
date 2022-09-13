@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavbarItem />
+    <NavbarItem id="notification-header-container" />
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>

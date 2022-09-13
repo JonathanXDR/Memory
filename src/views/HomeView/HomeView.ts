@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import LoadingSpinnerItem from '../../components/LoadingSpinnerItem/LoadingSpinnerItem.vue';
+import { Notification } from '@swisscom/sdx';
+import { MessageClickCallback } from '@swisscom/sdx/dist/es6/notification/Notification';
 import NavbarItem from '../../components/NavbarItem/NavbarItem.vue';
 import CardItem from '../../components/CardItem/CardItem.vue';
 
@@ -24,7 +26,10 @@ export default Vue.extend({
       time: 0,
       score: 0,
       userName: '',
+      userNameValid: undefined as boolean | undefined,
+      onCoolDown: false,
       timeString: '--:--',
+      rerender: false,
     };
   },
   async created() {
@@ -35,33 +40,87 @@ export default Vue.extend({
   },
   methods: {
     async resetGame() {
+      this.onCoolDown = true;
       (this.$refs.modal as HTMLSdxDialogElement).close();
+
       clearInterval(this.timer);
       this.timeString = '--:--';
       this.turns = 0;
       this.started = false;
       this.startTime = 0;
       this.time = 0;
+
       await this.loadCards();
+      this.userName = '';
+      this.userNameValid = undefined;
       this.score = 0;
+
+      setTimeout(() => {
+        this.rerender = false;
+      }, 0);
+
+      setTimeout(() => {
+        this.onCoolDown = false;
+      }, 500);
     },
 
-    userNameValid(): boolean {
-      return this.userName.length > 0;
+    displayNotificationHeader(
+      message: string,
+      modifierClass: '' | 'confirmation' | 'alert' = '',
+      containerId = 'notification-header-container',
+      closeAfter = 2000,
+      callback: MessageClickCallback = () => {
+        this.$router.push('/scoreboard');
+        notification.close();
+        return true;
+      },
+      cancelCallback: () => void = () => {
+        return false;
+      },
+    ) {
+      const notification = Notification.showOnHeader(
+        containerId,
+        message,
+        callback,
+        cancelCallback,
+        `${modifierClass === '' ? '' : 'notification--'}${modifierClass}`,
+      );
+      setTimeout(() => notification.close(), closeAfter);
     },
 
     // ApiService get cards
     async loadCards() {
+      const resetCards: Card[] = this.cards.map(cardDTO => ({
+        ...cardDTO,
+        flipped: false,
+        found: false,
+      }));
+
+      this.cards = resetCards;
       const data = await ApiService.getCards();
-      const cards: Card[] = data
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 8)
-        .map(cardDTO => ({ ...cardDTO, flipped: false, found: false }));
-      // Duplicating cards
-      cards.push(...JSON.parse(JSON.stringify(cards)));
-      // Shuffling cards
-      cards.sort(() => 0.5 - Math.random());
-      this.cards = cards;
+
+      setTimeout(() => {
+        const cards: Card[] = data
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 8)
+          .map(cardDTO => ({ ...cardDTO, flipped: false, found: false }));
+        // Duplicating cards
+        cards.push(...JSON.parse(JSON.stringify(cards)));
+        // Shuffling cards
+        cards.sort(() => 0.5 - Math.random());
+        this.cards = cards;
+      }, 250);
+    },
+
+    addResults(): void {
+      if (this.userNameValid && this.userName) {
+        ApiService.addScore({
+          userName: this.userName,
+          score: this.score,
+        });
+        this.resetGame();
+        this.displayNotificationHeader('Score successfully saved!', 'confirmation');
+      }
     },
 
     flippedCards(): Card[] {
@@ -106,6 +165,9 @@ export default Vue.extend({
     },
 
     finishGame(): void {
+      setTimeout(() => {
+        this.rerender = true;
+      }, 0);
       this.started = false;
 
       this.score =
@@ -119,11 +181,11 @@ export default Vue.extend({
 
       clearInterval(this.timer);
       (this.$refs.modal as HTMLSdxDialogElement).open();
+    },
 
-      ApiService.addScore({
-        userName: this.userName,
-        score: this.score,
-      });
+    setUserName(userName: string) {
+      this.userName = userName;
+      this.userNameValid = userName.length > 0;
     },
 
     flipCard(index: number): void {
