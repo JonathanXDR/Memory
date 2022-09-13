@@ -11,7 +11,7 @@ export default Vue.extend({
   data() {
     return {
       loading: true,
-      results: [] as ScoreBaseDTO[],
+      scores: [] as ScoreBaseDTO[],
     };
   },
   async created() {
@@ -22,13 +22,13 @@ export default Vue.extend({
   },
   methods: {
     async loadScores() {
-      const results = await ApiService.getScores();
-      this.results = results;
+      const scores = await ApiService.getScores();
+      this.scores = scores;
 
-      this.results
+      this.scores
         .sort((a, b) => b.score - a.score)
-        .forEach((result, index) => {
-          result.rank = index + 1;
+        .forEach((score, index) => {
+          score.rank = index + 1;
         });
     },
   },
