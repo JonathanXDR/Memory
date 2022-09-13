@@ -23,7 +23,6 @@ export default Vue.extend({
   methods: {
     async loadScores() {
       const results = await ApiService.getScores();
-      console.log('results', results);
       this.results = results;
 
       this.results
