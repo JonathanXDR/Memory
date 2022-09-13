@@ -7,18 +7,9 @@
         <table>
           <thead>
             <tr>
-              <th data-type="number" class="js-ascending">
-                Rank
-                <div class="arrow-icon"></div>
-              </th>
-              <th data-type="number" class="js-ascending">
-                Username
-                <div class="arrow-icon"></div>
-              </th>
-              <th data-type="number" class="js-ascending">
-                Total score
-                <div class="arrow-icon"></div>
-              </th>
+              <th data-type="number">Rank</th>
+              <th data-type="number">Username</th>
+              <th data-type="number">Total score</th>
             </tr>
           </thead>
           <tbody>
