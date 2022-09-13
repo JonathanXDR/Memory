@@ -3,9 +3,6 @@ import ApiService from '@/services/ApiService';
 import Vue from 'vue';
 import LoadingSpinner from '../../components/LoadingSpinnerItem/LoadingSpinnerItem.vue';
 
-// import Table from '@swisscom/sdx/dist/es6/table/Table';
-// new Table(document.querySelector('#my-table') as HTMLTableElement);
-
 export default Vue.extend({
   name: 'ScoreboardView',
   components: {
@@ -15,7 +12,6 @@ export default Vue.extend({
     return {
       loading: true,
       results: [] as ScoreBaseDTO[],
-      // ranks: [] as number[],
     };
   },
   async created() {
@@ -27,11 +23,11 @@ export default Vue.extend({
   methods: {
     async loadScores() {
       const results = await ApiService.getScores();
-      console.log(results);
+      console.log('results', results);
       this.results = results;
 
       this.results
-        // .sort((a, b) => b.score - a.score)
+        .sort((a, b) => b.score - a.score)
         .forEach((result, index) => {
           result.rank = index + 1;
         });
