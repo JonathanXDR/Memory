@@ -170,14 +170,17 @@ export default Vue.extend({
       }, 0);
       this.started = false;
 
-      this.score =
-        1000 -
-        (this.time - this.startTime - this.cards.length * 5) * 3 -
-        (this.turns - this.cards.length) * 5;
+      const turns = this.turns;
+      this.score = turns;
 
-      if (this.score < 0) {
-        this.score = 0;
-      }
+      // this.score =
+      //   1000 -
+      //   (this.time - this.startTime - this.cards.length * 5) * 3 -
+      //   (this.turns - this.cards.length) * 5;
+
+      // if (this.score < 0) {
+      //   this.score = 0;
+      // }
 
       clearInterval(this.timer);
       (this.$refs.modal as HTMLSdxDialogElement).open();
