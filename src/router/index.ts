@@ -1,20 +1,20 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/Home.vue';
-import Examples from '../views/Examples.vue';
+import HomeView from '../views/HomeView/HomeView.vue';
+import ScoreboardView from '../views/ScoreboardView/ScoreboardView.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'HomeView',
+    component: HomeView,
   },
   {
-    path: '/examples',
-    name: 'Examples',
-    component: Examples,
+    path: '/scoreboard',
+    name: 'ScoreboardView',
+    component: ScoreboardView,
   },
 ];
 
