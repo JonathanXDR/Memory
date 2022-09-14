@@ -5,25 +5,6 @@
     <div
       class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4 full-width--mobile-only"
     >
-      <!-- Debug Menu -->
-      <div class="major-wrapper">
-        <sdx-button
-          @click="startGame()"
-          label="<Debug> Start Game"
-          class="margin-bottom-2"
-        ></sdx-button>
-        <sdx-button
-          @click="finishGame()"
-          label="<Debug> Finish Game"
-          class="margin-bottom-2"
-        ></sdx-button>
-        <sdx-button
-          @click="loadCards()"
-          label="<Debug> Load Cards"
-          class="margin-bottom-2"
-        ></sdx-button>
-        <p class="margin-bottom-0 font--semi-bold">Total score: {{ score }}</p>
-      </div>
       <div class="score">
         <p class="margin-bottom-0 font--semi-bold">Time: {{ timeString }}</p>
         <p class="margin-bottom-0 font--semi-bold">Turns: {{ turns }}</p>
