@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section id="technologies">
+    <section>
       <ul class="item-container">
         <CardTile
           v-for="(technologies, index) in data.technologies"
