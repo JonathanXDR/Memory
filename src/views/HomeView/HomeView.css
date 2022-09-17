@@ -1,0 +1,19 @@
+.game-header {
+  gap: 32px;
+}
+
+.cards {
+  gap: 8px;
+}
+
+@media (min-width: 479px) {
+  .cards {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cards {
+    gap: 24px;
+  }
+}
