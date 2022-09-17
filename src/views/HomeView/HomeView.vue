@@ -62,5 +62,4 @@
 </template>
 
 <script lang="ts" src="./HomeView.ts"></script>
-import CardTile from '@/components/CardTile/CardTile.vue';
 <style src="./HomeView.css"></style>

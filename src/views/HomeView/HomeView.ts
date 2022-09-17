@@ -1,13 +1,12 @@
-import Vue from "vue";
 // import { Notification } from "@swisscom/sdx";
 // import { MessageClickCallback } from "@swisscom/sdx/dist/es6/notification/Notification";
 import NavBar from "@/components/NavBar/NavBar.vue";
 import CardTile from "@/components/CardTile/CardTile.vue";
 
-import { Card } from "@/types/Card";
+import type { Card } from "@/types/Card";
 import ApiService from "@/services/ApiService";
 
-export default Vue.extend({
+export default {
   name: "HomeView",
   components: {
     NavBar,
@@ -15,7 +14,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      loading: true,
       cards: [] as Card[],
       started: false,
       startTime: 0,
@@ -27,14 +25,10 @@ export default Vue.extend({
       userNameValid: undefined as boolean | undefined,
       onCoolDown: false,
       timeString: "--:--",
-      rerender: false,
     };
   },
   async created() {
     await this.loadCards();
-  },
-  mounted() {
-    this.loading = false;
   },
   methods: {
     async resetGame() {
@@ -52,10 +46,6 @@ export default Vue.extend({
       this.userName = "";
       this.userNameValid = undefined;
       this.score = 0;
-
-      setTimeout(() => {
-        this.rerender = false;
-      }, 0);
 
       setTimeout(() => {
         this.onCoolDown = false;
@@ -88,7 +78,7 @@ export default Vue.extend({
 
     // ApiService get cards
     async loadCards() {
-      const resetCards: Card[] = this.cards.map((cardDTO) => ({
+      const resetCards: Card[] = this.cards.map((cardDTO: any) => ({
         ...cardDTO,
         flipped: false,
         found: false,
@@ -168,9 +158,6 @@ export default Vue.extend({
     },
 
     finishGame(): void {
-      setTimeout(() => {
-        this.rerender = true;
-      }, 0);
       this.started = false;
 
       const turns = this.turns;
@@ -241,4 +228,4 @@ export default Vue.extend({
       });
     },
   },
-});
+};

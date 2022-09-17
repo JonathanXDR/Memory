@@ -1,21 +1,16 @@
-import { ScoreBaseDTO } from "@/dto/ScoreBaseDTO";
+import type { ScoreBaseDTO } from "@/dto/ScoreBaseDTO";
 import ApiService from "@/services/ApiService";
-import Vue from "vue";
 
-export default Vue.extend({
+export default {
   name: "ScoreboardView",
   components: {},
   data() {
     return {
-      loading: true,
       scores: [] as ScoreBaseDTO[],
     };
   },
   async created() {
     await this.loadScores();
-  },
-  mounted() {
-    this.loading = false;
   },
   methods: {
     async loadScores() {
@@ -28,4 +23,4 @@ export default Vue.extend({
         });
     },
   },
-});
+};
