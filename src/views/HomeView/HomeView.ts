@@ -2,6 +2,7 @@
 // import { MessageClickCallback } from "@swisscom/sdx/dist/es6/notification/Notification";
 import NavBar from "@/components/NavBar/NavBar.vue";
 import CardTile from "@/components/CardTile/CardTile.vue";
+import DialogModal from "@/components/DialogModal/DialogModal.vue";
 
 import type { Card } from "@/types/Card";
 import ApiService from "@/services/ApiService";
@@ -11,6 +12,7 @@ export default {
   components: {
     NavBar,
     CardTile,
+    DialogModal,
   },
   data() {
     return {

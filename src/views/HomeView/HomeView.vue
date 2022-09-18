@@ -11,7 +11,7 @@
           @click="resetGame()"
           class="icon-wrapper button button-elevated hero-button"
         >
-          <span class="icon-copy">Buy</span>
+          Reset
         </button>
       </div>
 
@@ -25,35 +25,7 @@
       </div>
     </section>
 
-    <!-- <div ref="modal" label="Congratulations! You won!" type="closable-modal">
-      <div class="col-md-6">
-        <div class="margin-bottom-4">
-          <p>Total Score: {{ score }}</p>
-          <input
-            v-if="rerender"
-            ref="input"
-            label="Username"
-            type="text"
-            placeholder="Enter Username..."
-            maxlength="30"
-            :valid="userNameValid"
-            :changeCallback.prop="setUserName"
-            :hitEnterCallback.prop="addResults"
-            :validation-message="
-              userNameValid === undefined || userNameValid === true
-                ? undefined
-                : 'Please enter a valid username'
-            "
-          />
-        </div>
-        <button
-          label="Submit"
-          type="submit"
-          :disabled="!userNameValid"
-          @click="addResults()"
-        ></button>
-      </div>
-    </div> -->
+    <DialogModal />
   </div>
 </template>
 
