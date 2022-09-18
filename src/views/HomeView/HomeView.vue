@@ -1,35 +1,31 @@
 <template>
-  <div id="home" class="container full-width--mobile-only">
-    <div
-      class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4 full-width--mobile-only"
-    >
-      <div class="score">
-        <p class="margin-bottom-0 font--semi-bold">Time: {{ timeString }}</p>
-        <p class="margin-bottom-0 font--semi-bold">Turns: {{ turns }}</p>
+  <div id="home">
+    <section class="ac-ln-content">
+      <div class="menu">
+        <div class="score">
+          <p>Time: {{ timeString }}</p>
+          <p>Turns: {{ turns }}</p>
+        </div>
+        <button
+          :disabled="onCoolDown"
+          @click="resetGame()"
+          class="icon-wrapper button button-elevated hero-button"
+        >
+          <span class="icon-copy">Buy</span>
+        </button>
       </div>
-      <button
-        label="Reset"
-        :disabled="onCoolDown"
-        @click="resetGame()"
-      ></button>
-    </div>
 
-    <div
-      class="cards row flex-items-xs-center no-gutters padding-0 full-width--mobile-only"
-    >
-      <div
-        class="card-container col-xs-auto"
-        v-for="(card, index) in cards"
-        :key="index"
-      >
-        <CardTile
-          :card="card"
-          @clickCallback="() => flipCard(index)"
-        ></CardTile>
+      <div class="cards">
+        <div class="card-container" v-for="(card, index) in cards" :key="index">
+          <CardTile
+            :card="card"
+            @clickCallback="() => flipCard(index)"
+          ></CardTile>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div ref="modal" label="Congratulations! You won!" type="closable-modal">
+    <!-- <div ref="modal" label="Congratulations! You won!" type="closable-modal">
       <div class="col-md-6">
         <div class="margin-bottom-4">
           <p>Total Score: {{ score }}</p>
@@ -57,7 +53,7 @@
           @click="addResults()"
         ></button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

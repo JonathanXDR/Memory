@@ -30,7 +30,7 @@
   border-radius: 6px;
   width: 100%;
   height: 100%;
-  back-faceground-color: rgb(238, 243, 246);
+  background-color: rgb(238, 243, 246);
   transition: box-shadow 0.25s;
 }
 
@@ -42,10 +42,11 @@
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  -webkit-back-faceface-visibility: hidden;
-  back-faceface-visibility: hidden;
-  back-faceground-size: 100% 100%;
-  back-faceground-repeat: no-repeat;
+  -webkit-background-visibility: hidden;
+  backface-visibility: hidden;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background: var(--color-fill-tertiary);
 }
 
 .card-container .tile {
