@@ -2,7 +2,7 @@
   <div class="tile" :class="{ flipped: card.flipped, found: card.found }">
     <div
       class="back-face"
-      :style="`background-image: url('${card.url}')`"
+      :style="`background-image: url('${card.flipped ? card.url : ''}')`"
     ></div>
     <div class="front-face" @click="$emit('clickCallback')"></div>
   </div>
