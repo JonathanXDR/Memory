@@ -1,4 +1,5 @@
 /*! CSS Used from: https://getsupport.apple.com/static/css/main.23f846e0.chunk.css */
+p,
 form,
 input,
 button {
@@ -32,6 +33,17 @@ button {
   direction: ltr;
   text-align: left;
 }
+.visuallyhidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+  clip-path: inset(0px 0px 99.9% 99.9%);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -59,6 +71,7 @@ button:focus {
   outline: none;
 }
 /*! CSS Used from: https://getsupport.apple.com/static/css/vendors~BrowseLocationsDetails~CaseLookup~DisambiguationProduct~DropOffDetails~ReviewRequest~Schedul~9132748e.5d1e2404.chunk.css */
+p,
 form,
 input,
 button {
@@ -95,6 +108,59 @@ button {
 /*! CSS Used from: https://getsupport.apple.com/static/css/CaseLookup.3a94bac7.chunk.css */
 .app-container.theme-dark .form-textbox-input {
   background-color: #000 !important;
+}
+.form-message-wrapper {
+  font-size: 12px;
+  line-height: 1.33337;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  color: #e30000;
+  position: relative;
+  margin-top: 0.47059rem;
+  margin-bottom: 0.70588rem;
+  display: none;
+}
+.form-message-wrapper::before,
+.form-message-wrapper::after {
+  font-family: "SF Pro Icons";
+  color: inherit;
+  display: inline-block;
+  font-style: normal;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: 1;
+  text-decoration: underline;
+  position: relative;
+  z-index: 1;
+  alt: "";
+}
+.form-message-wrapper::before,
+.form-message-wrapper::after {
+  text-decoration: none;
+}
+.form-message-wrapper::before {
+  display: none;
+}
+.form-message-wrapper::before,
+.form-message-wrapper::after {
+  content: "";
+}
+.form-message-wrapper::before {
+  padding-right: 0.3em;
+  display: inline-block;
+  top: 0;
+}
+.form-message-wrapper::after {
+  display: none;
+}
+.form-message-wrapper::before {
+  padding-right: 0.17647rem;
+  top: 0.17647rem;
+}
+.is-error .form-message-wrapper {
+  display: flex;
 }
 .button {
   cursor: pointer;
@@ -172,6 +238,9 @@ button {
   color: #fff;
   opacity: 0.32;
 }
+.theme-dark .form-message-wrapper {
+  color: #ff3037;
+}
 .case-lookup-container .case-lookup-form {
   margin-top: 40px;
 }
@@ -198,6 +267,59 @@ button {
     margin-top: 23px;
   }
 }
+.form-message-wrapper {
+  font-size: 12px;
+  line-height: 1.33337;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  color: #e30000;
+  position: relative;
+  margin-top: 0.47059rem;
+  margin-bottom: 0.70588rem;
+  display: none;
+}
+.form-message-wrapper::before,
+.form-message-wrapper::after {
+  font-family: "SF Pro Icons";
+  color: inherit;
+  display: inline-block;
+  font-style: normal;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: 1;
+  text-decoration: underline;
+  position: relative;
+  z-index: 1;
+  alt: "";
+}
+.form-message-wrapper::before,
+.form-message-wrapper::after {
+  text-decoration: none;
+}
+.form-message-wrapper::before {
+  display: none;
+}
+.form-message-wrapper::before,
+.form-message-wrapper::after {
+  content: "";
+}
+.form-message-wrapper::before {
+  padding-right: 0.3em;
+  display: inline-block;
+  top: 0;
+}
+.form-message-wrapper::after {
+  display: none;
+}
+.form-message-wrapper::before {
+  padding-right: 0.17647rem;
+  top: 0.17647rem;
+}
+.is-error .form-message-wrapper {
+  display: flex;
+}
 .form-textbox {
   position: relative;
 }
@@ -223,6 +345,9 @@ button {
 }
 .form-textbox .form-textbox-label {
   color: #86868b;
+}
+.form-textbox.is-error .form-textbox-label {
+  color: #e30000;
 }
 .form-textbox-input {
   font-size: 17px;
@@ -256,6 +381,9 @@ button {
   box-shadow: 0 0 0 4px rgba(0, 125, 250, 0.6);
   outline: none;
 }
+.is-error .form-textbox-input {
+  margin-bottom: 0;
+}
 .form-textbox-label {
   position: absolute;
   pointer-events: none;
@@ -272,6 +400,9 @@ button {
   letter-spacing: -0.022em;
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
     "Arial", sans-serif;
+}
+.theme-dark .form-message-wrapper {
+  color: #ff3037;
 }
 .theme-dark .form-textbox .form-textbox-input {
   color: #f5f5f7;
@@ -295,4 +426,10 @@ button {
 }
 .theme-dark .form-textbox .form-textbox-label {
   color: #6e6e73;
+}
+.theme-dark .form-textbox.is-error .form-textbox-label {
+  color: #ff3037;
+}
+form .form-error-inline-message {
+  display: block;
 }
