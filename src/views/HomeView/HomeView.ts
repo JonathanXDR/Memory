@@ -24,8 +24,6 @@ export default defineComponent({
       timer: 0,
       time: 0,
       score: 0,
-      userName: "",
-      userNameValid: undefined as boolean | undefined,
       onCoolDown: false,
       timeString: "--:--",
     };
@@ -46,8 +44,7 @@ export default defineComponent({
       this.time = 0;
 
       await this.loadCards();
-      this.userName = "";
-      this.userNameValid = undefined;
+
       this.score = 0;
 
       setTimeout(() => {
@@ -101,20 +98,6 @@ export default defineComponent({
         cards.sort(() => 0.5 - Math.random());
         this.cards = cards;
       }, 250);
-    },
-
-    addResults(): void {
-      if (this.userNameValid && this.userName) {
-        ApiService.addScore({
-          userName: this.userName,
-          score: this.score,
-        });
-        this.resetGame();
-        // this.displayNotificationHeader(
-        //   "Score successfully saved!",
-        //   "confirmation"
-        // );
-      }
     },
 
     flippedCards(): Card[] {
@@ -178,11 +161,6 @@ export default defineComponent({
       clearInterval(this.timer);
       this.modalOpen = true;
       // (this.$refs.modal as HTMLSdxDialogElement).open();
-    },
-
-    setUserName(userName: string) {
-      this.userName = userName;
-      this.userNameValid = userName.length > 0;
     },
 
     flipCard(index: number): void {

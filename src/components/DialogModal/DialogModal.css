@@ -192,10 +192,10 @@ a:disabled {
     left: 14px;
   }
 }
-.rc-overlay-fixed-width [data-core-overlay-content] {
+/* .rc-overlay-fixed-width [data-core-overlay-content] {
   flex-grow: 1;
   min-width: 48rem;
-}
+} */
 @media only screen and (max-width: 1023px) and (max-device-width: 736px) {
   .rc-overlay-fixed-width [data-core-overlay-content] {
     margin: 0 auto;

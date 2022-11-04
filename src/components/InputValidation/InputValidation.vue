@@ -1,48 +1,69 @@
 <template>
-  <form class="case-lookup-form">
-    <div class="row caseid-input-container">
-      <div
-      :class="{ "is-error" : userNameValid }"
-        class="form-textbox large-6 medium-6 small-12 case-id-input"
-      >
-        <input
-          data-testid="case-id"
-          type="text"
-          class="form-textbox-input"
-          id="case-id"
-          aria-label="Fallnummer oder Reparatur-ID eingeben"
-          aria-invalid="true"
-          aria-describedby="case-id_error"
-          value=""
-          control-id="ControlID-1"
-        /><label
-          for="case-id"
-          class="form-textbox-label"
-          aria-hidden="true"
-          id="case-id_label"
-          >Fallnummer oder Reparatur-ID eingeben</label
-        >
+  <div class="case-lookup-container theme-dark">
+    <form class="case-lookup-form">
+      <div class="caseid-input-container">
         <div
-        v-if="userNameValid"
-          class="form-message-wrapper form-error-inline-message"
-          id="case-id_error"
+          :class="{ 'is-error': !formValid }"
+          class="form-textbox large-6 medium-6 small-12 case-id-input"
         >
-          <span class="visuallyhidden">Error:</span
-          ><span class="form-message"
-            ><p>Gib eine Fallnummer oder Reparatur-ID ein.</p></span
+          <input
+            v-model.trim="userName"
+            data-testid="case-id"
+            type="text"
+            maxlength="30"
+            :class="{ 'form-textbox-entered': userName }"
+            class="form-textbox-input"
+            id="case-id"
+            aria-label="Fallnummer oder Reparatur-ID eingeben"
+            aria-invalid="true"
+            aria-describedby="case-id_error"
+            control-id="ControlID-1"
+          /><label
+            for="case-id"
+            class="form-textbox-label"
+            aria-hidden="true"
+            id="case-id_label"
+            >Fallnummer oder Reparatur-ID eingeben</label
           >
+          <div
+            v-if="!formValid"
+            class="form-message-wrapper form-error-inline-message"
+            id="case-id_error"
+          >
+            <span class="visuallyhidden">Error:</span
+            ><span class="form-message"
+              ><p>Gib eine Fallnummer oder Reparatur-ID ein.</p></span
+            >
+          </div>
         </div>
       </div>
-    </div>
-    <button
-      type="submit"
-      class="button button-super case-lookup-submit"
-      disabled=""
-      control-id="ControlID-2"
-    >
-      Weiter
-    </button>
-  </form>
+      <button
+        type="submit"
+        class="button button-super case-lookup-submit"
+        :disabled="!formValid"
+        @click="addResults()"
+        control-id="ControlID-2"
+      >
+        Weiter
+      </button>
+    </form>
+  </div>
+  <input
+    v-if="rerender"
+    ref="input"
+    label="Username"
+    type="text"
+    placeholder="Enter Username..."
+    maxlength="30"
+    :valid="userNameValid"
+    :changeCallback.prop="setUserName"
+    :hitEnterCallback.prop="addResults"
+    :validation-message="
+      userNameValid === undefined || userNameValid === true
+        ? undefined
+        : 'Please enter a valid username'
+    "
+  />
 </template>
 
 <script lang="ts" src="./InputValidation.ts"></script>

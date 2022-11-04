@@ -3,7 +3,7 @@
     <div
       :class="[
         { 'r-fade-transition-enter-done': modalOpen },
-        { 'r-fade-transition-exit-done': modalOpen === false },
+        { 'r-fade-transition-exit-done': !modalOpen },
       ]"
       data-core-fade-transition-wrapper=""
       class="rc-overlay rc-overlay-popup rc-overlay-fixed-width"
@@ -28,7 +28,7 @@
                 </h2>
                 <p class="t-body">Total Score: 18</p>
 
-                <InputValidation />
+                <InputValidation :score="score" />
                 <!--
                   <input
                   ref="input"

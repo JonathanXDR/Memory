@@ -4,13 +4,14 @@ import json from "@/assets/data/data.json";
 
 export default defineComponent({
   name: "DialogModal",
+  props: ["score"],
   components: {
     InputValidation,
   },
   data() {
     return {
       data: json,
-      modalOpen: false,
+      modalOpen: true,
     };
   },
   methods: {

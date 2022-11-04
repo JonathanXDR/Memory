@@ -28,7 +28,7 @@
       </div>
     </section>
 
-    <DialogModal />
+    <DialogModal :score="score" />
   </div>
 </template>
 
