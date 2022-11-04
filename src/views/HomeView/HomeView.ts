@@ -176,6 +176,7 @@ export default defineComponent({
       // }
 
       clearInterval(this.timer);
+      this.modalOpen = true;
       // (this.$refs.modal as HTMLSdxDialogElement).open();
     },
 
