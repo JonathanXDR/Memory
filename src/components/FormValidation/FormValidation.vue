@@ -1,5 +1,5 @@
 <template>
-  <div class="case-lookup-container theme-dark">
+  <div class="case-lookup-container">
     <form class="case-lookup-form">
       <div
         v-for="(input, index) in data.inputs"
@@ -37,21 +37,26 @@
             <component
               v-if="input.validation.icon"
               :is="input.validation.icon"
+              class="form-message-icon"
             />
-            <span class="form-message"
+            <span
+              :class="{ 'form-error-inline-message': !formValid }"
+              class="form-message"
               ><p>{{ input.validation.errorMessage }}</p></span
             >
           </div>
         </div>
       </div>
       <button
-        type="submit"
+        v-for="(button, index) in data.buttons"
+        :key="index"
+        :type="button.type"
         class="button button-super case-lookup-submit"
         :disabled="!formValid"
         @click="addResults()"
         control-id="ControlID-2"
       >
-        Weiter
+        {{ button.label }}
       </button>
     </form>
   </div>
@@ -73,5 +78,5 @@
   />
 </template>
 
-<script lang="ts" src="./InputValidation.ts"></script>
-<style scoped src="./InputValidation.css"></style>
+<script lang="ts" src="./FormValidation.ts"></script>
+<style scoped src="./FormValidation.css"></style>

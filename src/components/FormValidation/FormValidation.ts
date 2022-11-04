@@ -4,7 +4,7 @@ import ApiService from "@/services/ApiService";
 import ExclamationmarkCircle from "@/components/Icons/ExclamationmarkCircle.vue";
 
 export default defineComponent({
-  name: "InputValidation",
+  name: "FormValidation",
   props: ["score"],
   components: {
     ExclamationmarkCircle,
@@ -17,7 +17,6 @@ export default defineComponent({
   },
   computed: {
     formValid: function () {
-      console.log(this.data);
       return this.userName;
     },
   },
@@ -39,7 +38,6 @@ export default defineComponent({
     setUserName(userName: string) {
       this.userName = userName;
       this.formValid = userName.length > 0;
-      console.log("hallo");
     },
 
     resetUserName() {

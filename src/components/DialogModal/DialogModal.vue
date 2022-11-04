@@ -24,34 +24,11 @@
                   class="t-headline-reduced"
                   id="b79c0e00-5c20-11ed-933b-e7a7f9dc27fe"
                 >
-                  Congratulations! You won!
+                  {{ data.title }}
                 </h2>
-                <p class="t-body">Total Score: 18</p>
+                <p class="t-body">{{ data.description }} {{ score }}</p>
 
-                <InputValidation :score="score" />
-                <!--
-                  <input
-                  ref="input"
-                  label="Username"
-                  type="text"
-                  placeholder="Enter Username..."
-                  maxlength="30"
-                  :valid="userNameValid"
-                  :changeCallback.prop="setUserName"
-                  :hitEnterCallback.prop="addResults"
-                  :validation-message="
-                    userNameValid === undefined || userNameValid === true
-                      ? undefined
-                      : 'Please enter a valid username'
-                  "
-                />
-                <button
-                  label="Submit"
-                  type="submit"
-                  :disabled="!userNameValid"
-                  @click="addResults()"
-                ></button>
-                -->
+                <FormValidation :score="score" />
               </div>
             </div>
           </div>
