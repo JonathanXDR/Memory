@@ -24,41 +24,34 @@
                   class="t-headline-reduced"
                   id="b79c0e00-5c20-11ed-933b-e7a7f9dc27fe"
                 >
-                  Flexible delivery and pickup options.
+                  Congratulations! You won!
                 </h2>
-                <p class="t-body">
-                  Get your new Apple products quickly and easily with a handful
-                  of delivery and pickup options to choose from.
-                </p>
-                <h2 class="t-label">Two-hour delivery from an Apple Store.</h2>
-                <p class="t-body">
-                  Enjoy lightning-fast courier delivery for an additional fee at
-                  checkout, on eligible in-stock items in most metro areas.
-                  Delivery time windows can be scheduled at checkout.
-                </p>
-                <h2 class="t-label">Convenient local pickup.</h2>
-                <p class="t-body">
-                  Place your order online and pick it up at a local Apple Store.
-                  Curbside pickup is also available at select locations — simply
-                  park your car and we’ll bring your order out to you.
-                </p>
-                <h2 class="t-label">Free next-day delivery.</h2>
-                <p class="t-body">
-                  Most of your favorite Apple products are available for free
-                  next-day delivery.
-                </p>
-                <p class="dd-modal-link">
-                  <a
-                    href="/shop/shipping-pickup"
-                    data-slot-name="main1"
-                    data-feature-name="Astro Link"
-                    data-display-name="AOS: home/shipping_pickup"
-                    class="more"
-                    >Learn&nbsp;more<span class="a11y"
-                      >about free delivery</span
-                    ></a
-                  >
-                </p>
+                <p class="t-body">Total Score: 18</p>
+
+                <InputValidation />
+                <!--
+                  <input
+                  ref="input"
+                  label="Username"
+                  type="text"
+                  placeholder="Enter Username..."
+                  maxlength="30"
+                  :valid="userNameValid"
+                  :changeCallback.prop="setUserName"
+                  :hitEnterCallback.prop="addResults"
+                  :validation-message="
+                    userNameValid === undefined || userNameValid === true
+                      ? undefined
+                      : 'Please enter a valid username'
+                  "
+                />
+                <button
+                  label="Submit"
+                  type="submit"
+                  :disabled="!userNameValid"
+                  @click="addResults()"
+                ></button>
+                -->
               </div>
             </div>
           </div>

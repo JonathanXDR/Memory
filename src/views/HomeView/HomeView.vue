@@ -33,4 +33,4 @@
 </template>
 
 <script lang="ts" src="./HomeView.ts"></script>
-<style src="./HomeView.css"></style>
+<style scoped src="./HomeView.css"></style>
