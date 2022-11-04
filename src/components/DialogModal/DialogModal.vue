@@ -10,12 +10,7 @@
       data-core-overlay=""
       data-core-overlay-cover=""
     >
-      <div
-        data-core-overlay-content=""
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="b79c0e00-5c20-11ed-933b-e7a7f9dc27fe"
-      >
+      <div data-core-overlay-content="">
         <div class="rc-overlay-popup-outer">
           <div class="rc-overlay-popup-content">
             <div class="rc-overlay-loader-content">
@@ -33,20 +28,12 @@
             </div>
           </div>
         </div>
-        <button
-          type="button"
-          class="rc-overlay-close"
-          aria-label="Close"
-          data-autom="overlay-close"
-          @click="toggleModal()"
-        >
+        <button type="button" class="rc-overlay-close" @click="toggleModal()">
           <span class="rc-overlay-closesvg"
             ><svg
               width="21"
               height="21"
               class="as-svgicon as-svgicon-close as-svgicon-tiny as-svgicon-closetiny"
-              role="img"
-              aria-hidden="true"
             >
               <path fill="none" d="M0 0h21v21H0z"></path>
               <path

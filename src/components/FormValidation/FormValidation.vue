@@ -18,14 +18,9 @@
             :class="{ 'form-textbox-entered': userName }"
             class="form-textbox-input"
             id="case-id"
-            aria-label="Fallnummer oder Reparatur-ID eingeben"
-            aria-invalid="true"
-            aria-describedby="case-id_error"
-            control-id="ControlID-1"
           /><label
             for="case-id"
             class="form-textbox-label"
-            aria-hidden="true"
             id="case-id_label"
             >{{ input.placeholder }}</label
           >
@@ -50,32 +45,15 @@
       <button
         v-for="(button, index) in data.buttons"
         :key="index"
-        :type="button.type"
+        type="submit"
         class="button button-super case-lookup-submit"
         :disabled="!formValid"
         @click="addResults()"
-        control-id="ControlID-2"
       >
         {{ button.label }}
       </button>
     </form>
   </div>
-  <input
-    v-if="rerender"
-    ref="input"
-    label="Username"
-    type="text"
-    placeholder="Enter Username..."
-    maxlength="30"
-    :valid="userNameValid"
-    :changeCallback.prop="setUserName"
-    :hitEnterCallback.prop="addResults"
-    :validation-message="
-      userNameValid === undefined || userNameValid === true
-        ? undefined
-        : 'Please enter a valid username'
-    "
-  />
 </template>
 
 <script lang="ts" src="./FormValidation.ts"></script>
