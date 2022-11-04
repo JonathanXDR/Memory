@@ -1,18 +1,23 @@
 import { defineComponent } from "vue";
 import json from "@/assets/data/data.json";
 import ApiService from "@/services/ApiService";
+import ExclamationmarkCircle from "@/components/Icons/ExclamationmarkCircle.vue";
 
 export default defineComponent({
   name: "InputValidation",
   props: ["score"],
+  components: {
+    ExclamationmarkCircle,
+  },
   data() {
     return {
-      data: json,
+      data: json.components[0].data[3].data,
       userName: "",
     };
   },
   computed: {
     formValid: function () {
+      console.log(this.data);
       return this.userName;
     },
   },

@@ -1,7 +1,11 @@
 <template>
   <div class="case-lookup-container theme-dark">
     <form class="case-lookup-form">
-      <div class="caseid-input-container">
+      <div
+        v-for="(input, index) in data.inputs"
+        :key="index"
+        class="caseid-input-container"
+      >
         <div
           :class="{ 'is-error': !formValid }"
           class="form-textbox large-6 medium-6 small-12 case-id-input"
@@ -23,16 +27,19 @@
             class="form-textbox-label"
             aria-hidden="true"
             id="case-id_label"
-            >Fallnummer oder Reparatur-ID eingeben</label
+            >{{ input.placeholder }}</label
           >
           <div
             v-if="!formValid"
             class="form-message-wrapper form-error-inline-message"
             id="case-id_error"
           >
-            <span class="visuallyhidden">Error:</span
-            ><span class="form-message"
-              ><p>Gib eine Fallnummer oder Reparatur-ID ein.</p></span
+            <component
+              v-if="input.validation.icon"
+              :is="input.validation.icon"
+            />
+            <span class="form-message"
+              ><p>{{ input.validation.errorMessage }}</p></span
             >
           </div>
         </div>
