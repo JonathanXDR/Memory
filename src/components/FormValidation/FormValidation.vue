@@ -8,7 +8,7 @@
       >
         <div
           :class="{ 'is-error': !formValid }"
-          class="form-textbox large-6 medium-6 small-12 case-id-input"
+          class="form-textbox case-id-input"
         >
           <input
             v-model.trim="userName"
