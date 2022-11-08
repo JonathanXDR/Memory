@@ -1,5 +1,5 @@
 <template>
-  <section class="ac-ln-content">
+  <section class="section-separated">
     <h1>Scoreboard</h1>
     <table>
       <thead>
