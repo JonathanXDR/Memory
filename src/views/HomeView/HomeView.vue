@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <section class="ac-ln-content">
+    <section class="section-separated">
       <!-- Banner -->
       <div class="stats-banner">
         <div class="scores">
