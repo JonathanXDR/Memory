@@ -1,24 +1,17 @@
-import { ScoreBaseDTO } from '@/dto/ScoreBaseDTO';
-import ApiService from '@/services/ApiService';
-import Vue from 'vue';
-import LoadingSpinner from '../../components/LoadingSpinnerItem/LoadingSpinnerItem.vue';
+import type { ScoreBaseDTO } from "@/dto/ScoreBaseDTO";
+import ApiService from "@/services/ApiService";
+import { defineComponent } from "vue";
 
-export default Vue.extend({
-  name: 'ScoreboardView',
-  components: {
-    LoadingSpinner,
-  },
+export default defineComponent({
+  name: "ScoreboardView",
+  components: {},
   data() {
     return {
-      loading: true,
       scores: [] as ScoreBaseDTO[],
     };
   },
   async created() {
     await this.loadScores();
-  },
-  mounted() {
-    this.loading = false;
   },
   methods: {
     async loadScores() {

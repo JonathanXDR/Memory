@@ -1,0 +1,82 @@
+{
+  "components": [
+    {
+      "title": "common",
+      "data": [
+        {
+          "title": "RibbonBar",
+          "type": "",
+          "data": {
+            "description": "Was ist neu in Version 2.0?",
+            "links": [
+              {
+                "title": "Mehr erfahren",
+                "url": "https://github.com/JonathanXDR/Application-Website/compare/v1.1.0...v2.0.0",
+                "icon": "ChevronRightIcon"
+              }
+            ]
+          }
+        },
+        {
+          "title": "ShareSheet",
+          "type": "",
+          "data": {
+            "links": [
+              {
+                "title": "Mail",
+                "url": "mailto:jonathan.russ@bluewin.ch",
+                "category": "solid",
+                "icon": "envelope"
+              },
+              {
+                "title": "LinkedIn",
+                "url": "https://www.linkedin.com/in/jonathan-russ-b7442a228",
+                "category": "brands",
+                "icon": "linkedin"
+              },
+              {
+                "title": "GitHub",
+                "url": "https://github.com/JonathanXDR",
+                "category": "brands",
+                "icon": "github"
+              },
+              {
+                "title": "Twitter",
+                "url": "https://twitter.com/JonathanXD12_",
+                "category": "brands",
+                "icon": "twitter"
+              }
+            ]
+          }
+        },
+        {
+          "title": "DialogModal",
+          "type": "",
+          "data": {
+            "title": "Congratulations! You won!",
+            "description": "Total Score: ",
+            "inputs": [
+              {
+                "title": "Username",
+                "type": "text",
+                "placeholder": "Enter Username",
+                "validation": {
+                  "required": true,
+                  "errorMessage": "Enter a valid username",
+                  "icon": "ExclamationmarkCircle"
+                }
+              }
+            ],
+            "buttons": [
+              {
+                "title": "Submit",
+                "type": "submit",
+                "label": "Submit"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

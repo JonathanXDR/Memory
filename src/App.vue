@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <NavbarItem id="notification-header-container" />
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
-  </div>
+  <header>
+    <NavBar />
+    <!-- <RibbonBar /> -->
+  </header>
+  <Suspense>
+    <template #default>
+      <main>
+        <RouterView />
+      </main>
+    </template>
+    <template #fallback>
+      <LoadingSpinner />
+    </template>
+  </Suspense>
+  <FooterSection />
 </template>
-<script src="./App.ts" lang="ts"></script>
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s ease;
-}
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
+<script lang="ts" src="./App.ts"></script>
+<style scoped></style>
