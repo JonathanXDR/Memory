@@ -14,7 +14,7 @@
           </thead>
           <tbody>
             <tr v-for="(score, index) in scores" :key="index">
-              <td>{{ score.rank }}#</td>
+              <td>#{{ score.rank }}</td>
               <td>{{ score.userName }}</td>
               <td>{{ score.score }}</td>
             </tr>
