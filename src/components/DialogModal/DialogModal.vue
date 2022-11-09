@@ -24,7 +24,13 @@
                 <p class="t-body">{{ data.description }} {{ score }}</p>
 
                 <div class="case-lookup-container">
-                  <form class="case-lookup-form">
+                  <form
+                    v-on:submit.prevent="
+                      $emit('submitResults', userName);
+                      toggleModal();
+                    "
+                    class="case-lookup-form"
+                  >
                     <div
                       v-for="(input, index) in data.inputs"
                       :key="index"
@@ -72,10 +78,6 @@
                       type="submit"
                       class="button button-super case-lookup-submit"
                       :disabled="!formValid"
-                      @click="
-                        $emit('submitResults', userName);
-                        toggleModal();
-                      "
                     >
                       {{ button.label }}
                     </button>

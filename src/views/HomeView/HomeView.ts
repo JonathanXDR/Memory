@@ -163,14 +163,14 @@ export default defineComponent({
       const turns = this.turns;
       this.score = turns;
 
-      this.score =
-        1000 -
-        (this.time - this.startTime - this.cards.length * 5) * 3 -
-        (this.turns - this.cards.length) * 5;
+      // this.score =
+      //   1000 -
+      //   (this.time - this.startTime - this.cards.length * 5) * 3 -
+      //   (this.turns - this.cards.length) * 5;
 
-      if (this.score < 0) {
-        this.score = 0;
-      }
+      // if (this.score < 0) {
+      //   this.score = 0;
+      // }
 
       clearInterval(this.timer);
 

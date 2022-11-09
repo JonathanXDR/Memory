@@ -12,7 +12,7 @@ export default defineComponent({
   data() {
     return {
       data: json.components[0].data[2].data,
-      modalOpen: true,
+      modalOpen: false,
       userName: "",
     };
   },
