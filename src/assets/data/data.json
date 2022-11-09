@@ -54,13 +54,7 @@
           "type": "",
           "data": {
             "title": "Congratulations! You won!",
-            "description": "Total Score: "
-          }
-        },
-        {
-          "title": "InputValidation",
-          "type": "",
-          "data": {
+            "description": "Total Score: ",
             "inputs": [
               {
                 "title": "Username",

@@ -100,6 +100,20 @@ export default defineComponent({
       }, 250);
     },
 
+    submitResults(userName: string): void {
+      if (userName) {
+        ApiService.addScore({
+          userName: userName,
+          score: this.score,
+        });
+        this.resetGame();
+        // this.displayNotificationHeader(
+        //   "Score successfully saved!",
+        //   "confirmation"
+        // );
+      }
+    },
+
     flippedCards(): Card[] {
       // create new array of each card that is flipped
       return this.cards.filter((card) => card.flipped);
@@ -149,17 +163,19 @@ export default defineComponent({
       const turns = this.turns;
       this.score = turns;
 
-      // this.score =
-      //   1000 -
-      //   (this.time - this.startTime - this.cards.length * 5) * 3 -
-      //   (this.turns - this.cards.length) * 5;
+      this.score =
+        1000 -
+        (this.time - this.startTime - this.cards.length * 5) * 3 -
+        (this.turns - this.cards.length) * 5;
 
-      // if (this.score < 0) {
-      //   this.score = 0;
-      // }
+      if (this.score < 0) {
+        this.score = 0;
+      }
 
       clearInterval(this.timer);
-      this.modalOpen = true;
+
+      const modal = this.$refs.modal as any;
+      modal.toggleModal();
       // (this.$refs.modal as HTMLSdxDialogElement).open();
     },
 

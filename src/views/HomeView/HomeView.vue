@@ -28,7 +28,11 @@
       </div>
     </section>
 
-    <DialogModal :score="score" />
+    <DialogModal
+      @submitResults="(userName: string) => submitResults(userName)"
+      :score="score"
+      ref="modal"
+    />
   </div>
 </template>
 

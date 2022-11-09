@@ -1,19 +1,3 @@
-h2,
-p {
-  color: var(--color-code-plain);
-}
-
-button {
-  background: none;
-  border: 0;
-  box-sizing: content-box;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-  line-height: inherit;
-  overflow: visible;
-  vertical-align: inherit;
-}
 button:disabled {
   cursor: default;
 }
@@ -237,4 +221,185 @@ a:disabled {
 }
 .dd-modal p + .t-label {
   margin-top: 1em;
+}
+
+/* ------------------------------- Validation ------------------------------- */
+
+.large-6 {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+@media only screen and (max-width: 1068px) {
+  .medium-6 {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+@media only screen and (max-width: 734px) {
+  .small-12 {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+.form-message-wrapper {
+  font-size: 12px;
+  line-height: 1.33337;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  color: #e30000;
+  position: relative;
+  margin-top: 0.47059rem;
+  margin-bottom: 0.70588rem;
+  display: none;
+}
+.is-error .form-message-wrapper {
+  display: flex;
+}
+.form-message-wrapper {
+  color: var(--color-figure-red);
+}
+.case-lookup-container .case-lookup-form {
+  margin-top: 40px;
+}
+@media only screen and (max-width: 1068px) {
+  .case-lookup-container .case-lookup-form {
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 734px) {
+  .case-lookup-container .case-lookup-form {
+    margin-top: 23px;
+  }
+}
+.case-lookup-container .case-lookup-form .case-lookup-submit {
+  margin-top: 40px;
+}
+@media only screen and (max-width: 1068px) {
+  .case-lookup-container .case-lookup-form .case-lookup-submit {
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 734px) {
+  .case-lookup-container .case-lookup-form .case-lookup-submit {
+    margin-top: 23px;
+  }
+}
+.form-message-wrapper {
+  font-size: 12px;
+  line-height: 1.33337;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  color: #e30000;
+  position: relative;
+  margin-top: 0.47059rem;
+  margin-bottom: 0.70588rem;
+  display: none;
+}
+
+.form-message-icon {
+  height: 1.6em;
+  width: 1.6em;
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor;
+}
+.is-error .form-message-wrapper {
+  display: flex;
+}
+.form-textbox {
+  position: relative;
+}
+.form-textbox .form-textbox-input {
+  color: var(--color-fill-gray);
+  border-color: var(--color-fill-gray-tertiary);
+  background-color: var(--color-form-textbox-input);
+  text-overflow: ellipsis;
+}
+.form-textbox.is-error .form-textbox-input:not(:focus) {
+  border-color: var(--color-figure-red);
+}
+.form-textbox .form-textbox-input:disabled {
+  color: var(--color-fill-gray-secondary);
+  -webkit-text-fill-color: var(--color-fill-gray-secondary);
+  background-color: var(--color-form-textbox-input-disabled);
+}
+.form-textbox .form-textbox-input:focus {
+  border-color: #0071e3;
+}
+.form-textbox .form-textbox-input::-webkit-input-placeholder {
+  color: var(--color-figure-gray-secondary);
+}
+.form-textbox .form-textbox-input::placeholder {
+  color: var(--color-figure-gray-secondary);
+}
+.form-textbox .form-textbox-label {
+  color: var(--color-fill-gray-secondary);
+}
+.form-textbox.is-error .form-textbox-label {
+  color: var(--color-figure-red);
+}
+.form-textbox-input {
+  font-size: 17px;
+  line-height: 1.23536;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  width: 100%;
+  height: 3.29412rem;
+  border-radius: 12px;
+  border-width: 1px;
+  border-style: solid;
+  box-sizing: border-box;
+  margin-bottom: 0.82353rem;
+  padding: 1.05882rem 0.94118rem 0 0.94118rem;
+  text-align: left;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-textbox-input:focus ~ .form-textbox-label,
+.form-textbox-input.form-textbox-entered ~ .form-textbox-label {
+  font-size: 12px;
+  line-height: 1.33337;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  top: 0.58824rem;
+}
+.form-textbox-input:focus {
+  box-shadow: 0 0 0 4px rgba(0, 125, 250, 0.6);
+  outline: none;
+}
+.is-error .form-textbox-input {
+  margin-bottom: 0;
+}
+.form-textbox-label {
+  position: absolute;
+  pointer-events: none;
+  transition-timing-function: ease-in;
+  transition-duration: 0.125s;
+  top: 1.05882rem;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: calc(100% - 32px);
+  left: 1rem;
+  font-size: 17px;
+  line-height: 1.23536;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+}
+.form-message-wrapper {
+  color: var(--color-figure-red);
+}
+form .form-error-inline-message {
+  display: block;
+  align-items: center;
 }
