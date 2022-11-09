@@ -16,7 +16,6 @@ export default defineComponent({
       themeDark: false,
       navOpen: false,
       navDisabled: false,
-      links: null as HTMLCollectionOf<HTMLAnchorElement>,
     };
   },
   created() {
@@ -82,13 +81,6 @@ export default defineComponent({
       setTimeout(() => {
         background.classList.add("ac-ln-background-transition");
       }, 500);
-    },
-  },
-  watch: {
-    links: function () {
-      for (let i = 0; i < linkList.length; i++) {
-        LinkList[i].onclick = linkAction;
-      }
     },
   },
 });
