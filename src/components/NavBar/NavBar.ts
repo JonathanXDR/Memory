@@ -37,9 +37,6 @@ export default defineComponent({
       }
     }
   },
-  mounted() {
-    this.links = document.getElementsByTagName("a");
-  },
   methods: {
     toggleTheme() {
       this.themeDark = !this.themeDark;
