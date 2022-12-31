@@ -3,17 +3,46 @@
 }
 
 .cards {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
   gap: 8px;
 }
 
 @media (min-width: 479px) {
   .cards {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 16px;
   }
 }
 
 @media (min-width: 768px) {
   .cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 24px;
   }
+}
+
+.ac-ln-content {
+  margin: 64px auto 0 auto;
+  width: 90%;
+  padding: 0 4px;
+  position: relative;
+}
+
+.scores p {
+  font-weight: 600;
+  margin: 0 !important;
+}
+
+.stats-banner {
+  padding: 19px 0 19px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #cbcbcb;
+}
+
+.button {
+  border-radius: 8px;
 }

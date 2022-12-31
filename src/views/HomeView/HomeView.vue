@@ -1,54 +1,40 @@
 <template>
-  <div id="home" class="container full-width--mobile-only">
-    <LoadingSpinnerItem v-if="loading" />
-
-    <div
-      class="game-header divider row flex-items-xs-between flex-items-xs-middle margin-v-4 padding-bottom-4 full-width--mobile-only"
-    >
-      <div class="score">
-        <p class="margin-bottom-0 font--semi-bold">Time: {{ timeString }}</p>
-        <p class="margin-bottom-0 font--semi-bold">Turns: {{ turns }}</p>
-      </div>
-      <sdx-button label="Reset" :disabled="onCoolDown" @click="resetGame()"></sdx-button>
-    </div>
-
-    <div class="cards row flex-items-xs-center no-gutters padding-0 full-width--mobile-only">
-      <div class="card-container col-xs-auto" v-for="(card, index) in cards" :key="index">
-        <card-item :card="card" @clickCallback="() => flipCard(index)"></card-item>
-      </div>
-    </div>
-
-    <sdx-dialog ref="modal" label="Congratulations! You won!" type="closable-modal">
-      <sdx-dialog-content class="col-md-6">
-        <div class="margin-bottom-4">
-          <p>Total Score: {{ score }}</p>
-          <sdx-input
-            v-if="rerender"
-            ref="input"
-            label="Username"
-            type="text"
-            placeholder="Enter Username..."
-            maxlength="30"
-            :valid="userNameValid"
-            :changeCallback.prop="setUserName"
-            :hitEnterCallback.prop="addResults"
-            :validation-message="
-              userNameValid === undefined || userNameValid === true
-                ? undefined
-                : 'Please enter a valid username'
-            "
-          ></sdx-input>
+  <div id="home">
+    <section class="section-separated">
+      <!-- Banner -->
+      <div class="stats-banner">
+        <div class="scores">
+          <p>Time: {{ timeString }}</p>
+          <p>Turns: {{ turns }}</p>
         </div>
-        <sdx-button
-          label="Submit"
-          type="submit"
-          :disabled="!userNameValid"
-          @click="addResults()"
-        ></sdx-button>
-      </sdx-dialog-content>
-    </sdx-dialog>
+        <div class="controls">
+          <button
+            :disabled="onCoolDown"
+            @click="resetGame()"
+            class="button button-block"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card-container" v-for="(card, index) in cards" :key="index">
+          <CardTile
+            :card="card"
+            @clickCallback="() => flipCard(index)"
+          ></CardTile>
+        </div>
+      </div>
+    </section>
+
+    <DialogModal
+      @submitResults="(userName: string) => submitResults(userName)"
+      :score="score"
+      ref="modal"
+    />
   </div>
 </template>
 
 <script lang="ts" src="./HomeView.ts"></script>
-<style src="./HomeView.css"></style>
+<style scoped src="./HomeView.css"></style>

@@ -1,17 +1,25 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import { defineCustomElements } from '@swisscom/sdx/dist/js/webcomponents/loader';
-import '@swisscom/sdx/dist/css/sdx.min.css';
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-Vue.config.productionTip = false;
-Vue.config.ignoredElements = [/sdx-.+/];
+import App from "./App.vue";
+import router from "./router";
 
-defineCustomElements();
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-}).$mount('#app');
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+
+library.add(faEnvelope, faLinkedin, faGithub, faTwitter);
+
+import "./assets/main.css";
+
+const app = createApp(App);
+
+app.use(createPinia());
+app.use(router);
+app.component("font-awesome-icon", FontAwesomeIcon);
+
+app.mount("#app");

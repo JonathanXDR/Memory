@@ -1,4 +1,4 @@
-import { ScoreBaseDTO } from './ScoreBaseDTO';
+import type { ScoreBaseDTO } from "./ScoreBaseDTO";
 
 export interface ScoreGetDTO extends ScoreBaseDTO {
   id: string;
