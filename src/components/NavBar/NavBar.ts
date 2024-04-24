@@ -1,4 +1,4 @@
-import LogoIcon from "@/components/Icons/LogoIcon.vue";
+import LogoIcon from "@/components/icons/LogoIcon.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

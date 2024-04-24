@@ -1,6 +1,6 @@
-import { defineComponent } from "vue";
-import ExclamationmarkCircle from "@/components/Icons/ExclamationmarkCircle.vue";
 import json from "@/assets/data/data.json";
+import ExclamationmarkCircle from "@/components/icons/ExclamationmarkCircle.vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DialogModal",
